@@ -1,0 +1,226 @@
+
+(C:\Anaconda) C:\Users\uqrmafru\Dropbox\PhD_research\projects\DiViz_heart_disease>python main.py
+enter WHERE clause for q1->cp='atypical_angina'
+enter WHERE clause for q2->
+================================================================
+Query time: 0.04687857627868652
+Utility time: 0.001003265380859375
+Total view processing time: 0.048911094665527344
+================================================================
+Rank, Utility, (F, M, A)
+================================================================
+1 1.3564655274809414 ('avg', 'oldpeak', 'cp')
+2 1.331221956975687 ('max', 'oldpeak', 'cp')
+3 1.2553666569068191 ('max', 'chol', 'cp')
+4 1.2358891935962466 ('avg', 'age', 'cp')
+5 1.2315836673233331 ('avg', 'restbp', 'cp')
+================================================================
+Diversity time: 0.02710700035095215
+Greedy only diversity
+================================================================
+   ObjectiveF Function Meassure Attributes
+0    0.589116      avg  oldpeak         cp
+1    0.455939      max      age    restecg
+2    0.363085      max     chol        sex
+3    0.320994      avg   restbp      slope
+4    0.346276      max  thalach       thal
+
+(C:\Anaconda) C:\Users\uqrmafru\Dropbox\PhD_research\projects\DiViz_heart_disease>python main.py
+enter WHERE clause for q1->cp='atypical_angina'
+enter WHERE clause for q2->
+================================================================
+Query time: 0.027857303619384766
+Utility time: 0.0020322799682617188
+Total view processing time: 0.03189516067504883
+================================================================
+Rank, Utility, (F, M, A)
+================================================================
+1 1.3564655274809414 ('avg', 'oldpeak', 'cp')
+2 1.331221956975687 ('max', 'oldpeak', 'cp')
+3 1.2553666569068191 ('max', 'chol', 'cp')
+4 1.2358891935962466 ('avg', 'age', 'cp')
+5 1.2315836673233331 ('avg', 'restbp', 'cp')
+6 1.224744871391589 ('max', 'age', 'cp')
+7 1.223972917524457 ('avg', 'chol', 'cp')
+8 1.2198360545581526 ('max', 'restbp', 'cp')
+9 1.2151888486255271 ('max', 'thalach', 'cp')
+10 1.2124584567316794 ('avg', 'thalach', 'cp')
+11 1.065615711170359 ('avg', 'oldpeak', 'restecg')
+12 1.0228274172860936 ('avg', 'oldpeak', 'exang')
+13 1.0056051876526988 ('avg', 'oldpeak', 'fbs')
+14 0.9051847165931322 ('avg', 'oldpeak', 'thal')
+15 0.8856148855400953 ('max', 'oldpeak', 'fbs')
+================================================================
+Diversity time: 0.03910422325134277
+Greedy only diversity
+================================================================
+    ObjectiveF Function Meassure Attributes
+0     0.589116      avg  oldpeak         cp
+1     0.455939      max      age    restecg
+2     0.363085      max     chol        sex
+3     0.320994      avg   restbp      slope
+4     0.346276      max  thalach       thal
+5     0.328781      avg      age      exang
+6     0.359299      max   restbp        fbs
+7     0.293117      avg     chol        num
+8     0.466384      max  oldpeak      exang
+9     0.442312      avg  thalach    restecg
+10    0.501401      avg  oldpeak        fbs
+11    0.563842      max     chol         cp
+12    0.313502      max      age      slope
+13    0.306692      avg   restbp       thal
+14    0.276220      avg  thalach        sex
+
+(C:\Anaconda) C:\Users\uqrmafru\Dropbox\PhD_research\projects\DiViz_heart_disease>python main.py
+enter WHERE clause for q1->cp='atypical_angina'
+enter WHERE clause for q2->
+================================================================
+Query time: 0.02724146842956543
+Utility time: 0.001003265380859375
+Total view processing time: 0.028244733810424805
+================================================================
+Rank, Utility, (F, M, A)
+================================================================
+1 1.3564655274809414 ('avg', 'oldpeak', 'cp')
+2 1.331221956975687 ('max', 'oldpeak', 'cp')
+3 1.2553666569068191 ('max', 'chol', 'cp')
+4 1.2358891935962466 ('avg', 'age', 'cp')
+5 1.2315836673233331 ('avg', 'restbp', 'cp')
+6 1.224744871391589 ('max', 'age', 'cp')
+7 1.223972917524457 ('avg', 'chol', 'cp')
+8 1.2198360545581526 ('max', 'restbp', 'cp')
+9 1.2151888486255271 ('max', 'thalach', 'cp')
+10 1.2124584567316794 ('avg', 'thalach', 'cp')
+11 1.065615711170359 ('avg', 'oldpeak', 'restecg')
+12 1.0228274172860936 ('avg', 'oldpeak', 'exang')
+13 1.0056051876526988 ('avg', 'oldpeak', 'fbs')
+14 0.9051847165931322 ('avg', 'oldpeak', 'thal')
+15 0.8856148855400953 ('max', 'oldpeak', 'fbs')
+16 0.8655359856024945 ('max', 'oldpeak', 'exang')
+17 0.847400403375189 ('avg', 'age', 'restecg')
+18 0.8342548385214096 ('avg', 'restbp', 'restecg')
+19 0.8326367545899322 ('avg', 'chol', 'restecg')
+20 0.823754471047914 ('max', 'age', 'restecg')
+21 0.8017837257372731 ('max', 'restbp', 'restecg')
+22 0.7872218936609645 ('max', 'oldpeak', 'thal')
+23 0.7692471960274241 ('avg', 'thalach', 'restecg')
+24 0.7370277311900889 ('max', 'oldpeak', 'restecg')
+25 0.7247766585778526 ('max', 'chol', 'restecg')
+================================================================
+Diversity time: 0.05705118179321289
+Greedy only diversity
+================================================================
+    ObjectiveF Function Meassure Attributes
+0     0.589116      avg  oldpeak         cp
+1     0.455939      max      age    restecg
+2     0.363085      max     chol        sex
+3     0.320994      avg   restbp      slope
+4     0.346276      max  thalach       thal
+5     0.328781      avg      age      exang
+6     0.359299      max   restbp        fbs
+7     0.293117      avg     chol        num
+8     0.466384      max  oldpeak      exang
+9     0.442312      avg  thalach    restecg
+10    0.501401      avg  oldpeak        fbs
+11    0.563842      max     chol         cp
+12    0.313502      max      age      slope
+13    0.306692      avg   restbp       thal
+14    0.276220      avg  thalach        sex
+15    0.314859      max  oldpeak        num
+16    0.558972      avg      age         cp
+17    0.450446      max   restbp    restecg
+18    0.312544      max  thalach      exang
+19    0.282828      avg     chol       thal
+20    0.405105      max  oldpeak      slope
+21    0.296152      avg      age        num
+22    0.334798      max     chol        fbs
+23    0.277283      avg   restbp        sex
+24    0.301169      avg  thalach      slope
+
+(C:\Anaconda) C:\Users\uqrmafru\Dropbox\PhD_research\projects\DiViz_heart_disease>python main.py
+enter WHERE clause for q1->cp='atypical_angina'
+enter WHERE clause for q2->
+================================================================
+Query time: 0.02790069580078125
+Utility time: 0.0010027885437011719
+Total view processing time: 0.029885053634643555
+================================================================
+Rank, Utility, (F, M, A)
+================================================================
+1 1.3564655274809414 ('avg', 'oldpeak', 'cp')
+2 1.331221956975687 ('max', 'oldpeak', 'cp')
+3 1.2553666569068191 ('max', 'chol', 'cp')
+4 1.2358891935962466 ('avg', 'age', 'cp')
+5 1.2315836673233331 ('avg', 'restbp', 'cp')
+6 1.224744871391589 ('max', 'age', 'cp')
+7 1.223972917524457 ('avg', 'chol', 'cp')
+8 1.2198360545581526 ('max', 'restbp', 'cp')
+9 1.2151888486255271 ('max', 'thalach', 'cp')
+10 1.2124584567316794 ('avg', 'thalach', 'cp')
+11 1.065615711170359 ('avg', 'oldpeak', 'restecg')
+12 1.0228274172860936 ('avg', 'oldpeak', 'exang')
+13 1.0056051876526988 ('avg', 'oldpeak', 'fbs')
+14 0.9051847165931322 ('avg', 'oldpeak', 'thal')
+15 0.8856148855400953 ('max', 'oldpeak', 'fbs')
+16 0.8655359856024945 ('max', 'oldpeak', 'exang')
+17 0.847400403375189 ('avg', 'age', 'restecg')
+18 0.8342548385214096 ('avg', 'restbp', 'restecg')
+19 0.8326367545899322 ('avg', 'chol', 'restecg')
+20 0.823754471047914 ('max', 'age', 'restecg')
+21 0.8017837257372731 ('max', 'restbp', 'restecg')
+22 0.7872218936609645 ('max', 'oldpeak', 'thal')
+23 0.7692471960274241 ('avg', 'thalach', 'restecg')
+24 0.7370277311900889 ('max', 'oldpeak', 'restecg')
+25 0.7247766585778526 ('max', 'chol', 'restecg')
+26 0.7227641798688508 ('max', 'thalach', 'restecg')
+27 0.6850411622071261 ('avg', 'oldpeak', 'sex')
+28 0.6550570220873864 ('avg', 'oldpeak', 'slope')
+29 0.6204197247997802 ('max', 'oldpeak', 'slope')
+30 0.45233935243008255 ('max', 'chol', 'sex')
+31 0.43796377114231183 ('max', 'chol', 'slope')
+32 0.43719546038628915 ('max', 'restbp', 'fbs')
+33 0.43683649461727997 ('max', 'restbp', 'slope')
+34 0.4235529086594938 ('max', 'chol', 'thal')
+35 0.41934169555044093 ('max', 'oldpeak', 'sex')
+================================================================
+Diversity time: 0.08218598365783691
+Greedy only diversity
+================================================================
+    ObjectiveF Function Meassure Attributes
+0     0.589116      avg  oldpeak         cp
+1     0.455939      max      age    restecg
+2     0.363085      max     chol        sex
+3     0.320994      avg   restbp      slope
+4     0.346276      max  thalach       thal
+5     0.328781      avg      age      exang
+6     0.359299      max   restbp        fbs
+7     0.293117      avg     chol        num
+8     0.466384      max  oldpeak      exang
+9     0.442312      avg  thalach    restecg
+10    0.501401      avg  oldpeak        fbs
+11    0.563842      max     chol         cp
+12    0.313502      max      age      slope
+13    0.306692      avg   restbp       thal
+14    0.276220      avg  thalach        sex
+15    0.314859      max  oldpeak        num
+16    0.558972      avg      age         cp
+17    0.450446      max   restbp    restecg
+18    0.312544      max  thalach      exang
+19    0.282828      avg     chol       thal
+20    0.405105      max  oldpeak      slope
+21    0.296152      avg      age        num
+22    0.334798      max     chol        fbs
+23    0.277283      avg   restbp        sex
+24    0.301169      avg  thalach      slope
+25    0.554959      max   restbp         cp
+26    0.516404      avg  oldpeak    restecg
+27    0.302091      max      age       thal
+28    0.279235      avg     chol      exang
+29    0.250000      max  thalach        num
+30    0.354835      max  oldpeak        sex
+31    0.263692      avg      age        fbs
+32    0.458159      avg     chol    restecg
+33    0.290643      max  thalach        fbs
+34    0.289884      avg   restbp        num
+
+(C:\Anaconda) C:\Users\uqrmafru\Dropbox\PhD_research\projects\DiViz_heart_disease>

@@ -1,0 +1,20 @@
+Only Importance,5,0.32737422
+Only Diversity,5,0.036564
+i-DiVE-Greedy,5,0.33212154
+i-DiVE-SwapI,5,0.82353454
+i-DiVE-SwapD,5,0.81654565
+Only Importance,15,0.32737422
+Only Diversity,15,0.048656563
+i-DiVE-Greedy,15,0.3487854
+i-DiVE-SwapI,15,1.052313
+i-DiVE-SwapD,15,1.04324545
+Only Importance,25,0.32737422
+Only Diversity,25,0.086556323
+i-DiVE-Greedy,25,0.35121213
+i-DiVE-SwapI,25,1.3777545
+i-DiVE-SwapD,25,1.370899797
+Only Importance,35,0.32737422
+Only Diversity,35,0.10032231
+i-DiVE-Greedy,35,0.367545421
+i-DiVE-SwapI,35,1.793119132
+i-DiVE-SwapD,35,1.801026698

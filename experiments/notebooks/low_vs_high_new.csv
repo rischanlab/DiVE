@@ -1,0 +1,20 @@
+tradeoff,(low importance query load) DiVE-Greedy-Adaptive,(high importance query load) DiVE-Greedy-Adaptive,(low importance query load) DiVE-dSwap-Adaptive,(high importance query load) DiVE-dSwap-Adaptive
+0,0,0,0,0
+0.1,0,0,0,0
+0.2,0,0,1,0
+0.3,0,0,5,0
+0.4,0,0,10,3
+0.5,0,0,21,5
+0.6,0,0,29,13
+0.7,0,0,39,25
+0.8,9,9,48,35
+0.82,12,10,48,35
+0.84,12,10,49,37
+0.86,16,12,49,41
+0.88,16,15,50,46
+0.9,38,30,53,46
+0.92,38,30,53,47
+0.94,38,32,53,51
+0.96,38,35,57,55
+0.98,39,38,57,55
+1,47,47,65,65

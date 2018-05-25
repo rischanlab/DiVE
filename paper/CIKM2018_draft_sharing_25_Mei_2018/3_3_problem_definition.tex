@@ -1,0 +1,236 @@
+% ============================================== %
+% PRELIMINARIES %
+% ============================================== %
+
+\subsection{Problem Definition}\label{subsec:problem_definition}
+% %
+% %
+In this section, we formally define our problem for recommending diversified interesting aggregate views.  
+%
+Towards this, we first define the metrics to measure the performance of our proposed visualization recommendation system.
+
+% in terms of: 1) the quality of recommended visualizations, and 2) the processing cost incurred in computing those visualizations.
+
+\subsubsection{Hybrid Objective Function}
+
+Our hybrid objective function is designed to consider both the importance and diversity of the recommended views. 
+%
+Particularly, it integrates two components: 1) the total importance score of set $S$ and 2) the diversity score of $S$.
+
+The importance score of the a $S$ is calculated as the average value of the importance measure of each view in $S$, as given in Eq.\ref{importance_score}. 
+%
+Hence, the total importance score of $S$ is defined as: $ I\left(S\right)= \sum_{i=1}^{k} \dfrac{I(V_i )}{I_u}, V_i  \in S $, where $I_u$ is the upper bound on the importance score for an individual view, which is achieved when for each group $a_i$, the corresponding value $\frac{g_i}{G}$ in $P[V_{i}(D_R)]$ or $P[V_{i}(D_Q)]$ is zero. Thus, $I_u = \sqrt{2}$, and is used to normalize the average importance score for set $S$. 
+
+In order to measure the diversity of a set of objects, several diversity functions have been employed in the literature \cite{Vieira2011, Clarke2008}. 
+%
+Among those, previous research has mostly focused on measuring diversity based on either the average or the minimum of the pairwise distances between the elements of a set \cite{Wu2014}. 
+%
+In this work, we focus on the first of those variants (i.e., average), as it maximizes the coverage of $S$. 
+%
+Hence, given a distance metric $ D\left(V_i, V_j\right) $, as given in equation \ref{diversity_score}, the diversity of a set $S$ can be simply measured as follows:
+
+$ f\left(S,D\right)= \dfrac{1}{k\left(k-1\right)}  \sum_{i=1}^{k} \sum_{j>i}^{k} D\left(V_i,V_j\right) ,V_i,V_j  \in S $
+
+Since the maximum context-based deviation between any two views in equation \ref{diversity_score}  is 1.0, then dividing the sum of distances by $k\left(k-1\right)$ ensures that the diversity score of set $S$ is normalized and bounded by 1.0.
+
+%Next, we define our proposed hybrid objective function that captures both the importance and diversity of the set of recommended views $S$. 
+%
+Putting it together, for a set of views $S \subseteq V$, our hybrid objective function is formulated as the linear weighted combination of the importance score, $ I\left(S\right) $ and diversity score $ f\left(S,D\right) $, and is defined as:
+\begin{equation}
+F\left(S\right) =  \left(1-\lambda\right) \times I\left(S\right) + \lambda \times f\left(S,D\right)
+\label{objectif_function}
+\end{equation}
+
+where $ 0 \leq \lambda \geq 1 $ is employed to control the preference given to each of the importance and diversity components. 
+%
+For instance, a higher value of $  \lambda $ results in a set of more diverse views, whereas a lower value of $ \lambda $ generates a set of the most important views, which is likely to exhibit redundancy in the recommended views. 
+%
+
+Given the hybrid objective function, our goal is to find an optimum set of views  $ S^* $ that maximizes the objective function $ F\left(S\right) $, which is defined as follows:
+\begin{definition} 
+{\bf Recommending diversified important views :} Given a target subset $D_Q$  and a reference subset $D_R$, the goal is to recommend a set $S \subseteq \mathbb{V}$, where $|S| = k$, and $\mathbb{V}$ is the set of all possible target views, such that the overall hybrid objective $ F\left(S\right) $ is maximized. 
+\end{definition} 
+
+\eat{
+\begin{equation}
+S^* = \underset{\underset{|S|=k} {S \subseteq \mathbb{V}}} {\mathrm{argmax}} F\left(S\right) 
+\label{argmaxF}
+\end{equation} 
+}
+%
+%Given the definition above, the quality of the recommended set of views is measured in terms of the value of the hybrid objective function $F\left(S\right)$.
+
+
+
+
+
+\vspace{-7pt}
+\subsubsection{Cost of Visualization Recommendation}
+
+Exisiting research has shown that recommending aggregate data visualizations based on data-driven content-based deviation is a computationally expensive task \cite{Vartak2014, Vartak2015, Ehsan2016}.
+%
+Moreover, integrating diversification to the view recommendation problem, as described above, further increases that computational cost.
+%
+In particular, the incurred processing cost includes the following two components: 1) Query processing cost $C_Q$: measured in terms of the time needed to execute and compare all the queries underlying the set of target views as well as their corresponding reference views (i.e., content-based deviation), and 2) View diversification cost $C_D$: measured in terms of the time needed to compute all the pairwise distances between each pair of target views (i.e., context-based deviation).
+%
+Consequently, the total cost $C_T$ for recommending a set of views is simply defined as: $C_T= C_Q + C_D$
+
+In principle, traditional data diversification methods that consider both relevance and diversity can be directly applied in the context of our problem to maximize the objective function Eq.\ref{objectif_function}.
+%
+For instance, in the context of recommending web search, such methods are designed to recommend a set of diversified objects (e.g., web documents) that are relevant to the user needs. 
+%
+However, in that setting, the relevance of an object is either given or simply computed.
+%
+To the contrary, in our setting for view recommendation, the importance of a view is a computational expensive operation, which requires the execution of a target and reference view. 
+%
+As such, directly applying those methods leads to a ``process-first-diversify-next" approach, in which all possible data visualization are generated first via executing a large number of aggregate queries. 
+%
+To address that challenge and minimize the incurred query processing cost, next we propose our {\em DiVE} scheme, which leverages the properties of both the importance and diversity to prune a large number of low-utility views, without compromising the quality of recommendations. 
+
+\eat{
+\note{
+However, in this work, we optimze the query execution time by reducing the search sapce of candidate views. Ou proposed pruning scheme leverages the properties of importance and diversity metrics to prune a large number of low-utility views. The details of the pruning scheme are presented later in the paper.
+}
+
+
+
+\note{
+
+In this section, we formally define the problem of recommending a set of k views that are interesting as well as diverse among themselves. In particular, given a target subset $\mathcal{D_Q}$  and a reference subset $\mathcal{D_R}$ , set of all possible views $\mathbb{V}$, our objective is to select a set $S \subseteq \mathbb{V}$  where $|S|$ = k, such that the Interestingness score of the views in $S$ and their mutual diversity is maximized. 
+
+Making visualization recommendations, particularly based on both data and context, is a computationally expensive task. Although hundreds of visualizations are possible for a given subset of data, only a small fraction of the visualizations are actually of interest and are included in the top-k set. Consequently, a significant fraction of the query processing cost is incurred on evaluating low-utility visualizations. Hence, in this work along with the quality of set $S$, we also aim to minimize the query processing cost of computing $S$. In particular, we apply effective pruning techniques to reduce the search space of visualizations. 
+
+
+Next, we define the metrics to measure the performance of our proposed visualization recommendation system in terms of quality of recommended visualizations and processing cost of computing those visualizations.
+
+\subsubsection{Hybrid Objective Function}
+
+Our hybrid objective function is designed to consider both the importance and diversity of the recommended views. Thus, we split the objective function into two components: 1) total importance score of set $S$ and 2) the diversity score of $S$.
+
+
+The importance score of the set S is calculated as the average value of the importance measure of each view in S, as given in equation \ref{importance_score}. Formally, the total importance score of S is defined as:
+\newline
+
+\centerline{$ I\left(S\right)= \dfrac{\dfrac{1}{k} \sum_{i=1}^{k} I(V_i )}{I_u}, V_i  \in S $}
+\bigskip
+
+where $I_u$ is the upper bound on the importance score for an individual view. The value of $I_u$ is used to normalize the average importance score for set S. (i dont understand why this normalization is needed.)
+
+
+
+In order to measure the diversity of a set of objects, several diversity functions have been employed in the literature \cite{Vieira2011, Clarke2008}. Among those, previous research has mostly focused on measuring diversity based on either the average or the minimum of the pairwise distances between elements of set \cite{Wu2014}. We focus on the first of those variants (i.e., average), as it considers all the views in S. Given a distance matric $ D\left(V_i, V_j\right) $ as given in equation \ref{diversity_score}, the diversity of a set S can be measured by a diversity function $ f\left(S,D\right) $ that captures the dissimilarity between the views in S, defined as:
+\newline
+
+$ f\left(S,D\right)= \dfrac{1}{k\left(k-1\right)}  \sum_{i=1}^{k} \sum_{j>i}^{k} D\left(V_i,V_j\right) ,V_i,V_j  \in S $
+\newline
+
+The maximum contextual distance between two views as in equation \ref{diversity_score}  is 1. Therefore, dividing the sum of distances between all views in S by $k\left(k-1\right)$ ensures that the diversity score of set S is normalized.
+
+Next, we define our proposed hybrid objective function that captures both importance and diversity of the set of recommended views S. Specifically, for a set of views S $\subseteq V$ an objective function is formulated as the linear weighted combination of the importance score, $ I\left(S\right) $ and diversity function $ f\left(S,D\right) $ which is defined as:
+
+
+\begin{equation}
+F\left(S\right) =  \left(1-\lambda\right).I\left(S\right) + \lambda.f\left(S,D\right)
+\label{objectif_function}
+\end{equation}
+
+
+where $ 0 \leq \lambda \geq 1 $ is employed to control the contribution between importance and diversity in the hybrid objective function. The higher values of $  \lambda $ result in a set of more diverse views whereas lower values of $ \lambda $ generate a set of the most important views that might be similar to each other. 
+Given the hybrid objective function, our goal is to find an optimum set of views  $ S^* $ that maximizes the objective function $ F\left(S\right) $: 
+
+\begin{equation}
+S^* = \underset{\underset{|S|=k} {S \subseteq V}} {\mathrm{argmax}} F\left(S\right) 
+\label{argmaxF}
+\end{equation} 
+
+Hence, the quality of the recommended set of views is measured in terms of the value of the hybrid objective function $F\left(S\right)$.
+
+}
+
+\note{
+\subsubsection{Cost of Visualization Recommendation}
+As mentioned earlier, the visualization recommendation is a computationally expensive process \cite{Vartak2014, Vartak2015, Ehsan2016}. Adding diversification to the view recommendation further increases the computational cost. Hence, our goal is to minimize the processing cost of selecting the top-k views that are both important and diverse. We split the processing cost of visualization recommendation into following two components:
+\begin{enumerate}
+	\item Query Processing cost $C_Q$: measured in terms of query execution time to generate the content of each view.
+	\item Diversification cost $C_{div}$: measured in terms of time to compute the contextual distance between each pair of view.
+\end{enumerate}
+
+Consequently, the total cost of recommending a set of top-k views can be defined as:
+\[
+Cost\left(S\right)= C_Q\left(S\right)+C_{div}\left(S\right)
+\]
+
+As the query execution cost includes both I/O and CPU cost, it dominates the overall cost of computing set S. Therefore, our goal in this work is to minimize the query execution time. Several approaches have been proposed in literature to optimize the query execution time i.e, query results caching, pruning techniques \cite{Khan2015} shared computations, combining target and reference query, combination of multiple aggregates, combination of multiple GROUP BY, and parallel query and execution, \cite{Vartak2015, Wu2014}. 
+}
+
+\note{
+However, in this work, we optimze the query execution time by reducing the search sapce of candidate views. Ou proposed pruning scheme leverages the properties of importance and diversity metrics to prune a large number of low-utility views. The details of the pruning scheme are presented later in the paper.
+}
+}
+
+\eat{
+The proposed recommendation visualization systems should recommend set of views with the high importance score and maximum diversity as well as it should has high efficiency in terms of costs due to all computations are running on the fly. 
+% %
+Hence, there will be two variables that can be used for evaluation, which are \textit{effectiveness} and \textit{efficiency}. 
+
+\subsubsection{Effectiveness}
+% %
+\textit{DiVE} scheme using hybrid approach which designed to recommend a set of k views that considering importance and diversity.
+% %
+In this section, we formally define the problem of the quality of recommended views. 
+% %
+
+In order to generate the top-k views that considering both importance and diversity, each view is evaluated by its reference to measure the quality of individual view and all views in the set are evaluated in terms of diversity. For instance, given an example view $V_i$, $ V_i  \in S $, set of all possible views $ \mathbb{V} $, our objective is to select a set of views S $\subseteq \mathbb{V} $ where size of S = i = k, such that the importance score of the views in S and the diversity of all views in the set S is maximized. 
+% %
+
+To achieve this goal, there are two components that need to be considered, the importance score of a set of views S and the diversity score of the set S. Hence, we need to combine those two components as a hybrid objective utility function. 
+
+\textbf{\textit{The importance score computation}}. The importance score of the set S is calculated as the average value of the importance measure of each view in S, it can be defined as:
+\newline
+
+\centerline{$ I\left(S\right)= \dfrac{\dfrac{1}{k} \sum_{i=1}^{k} I(V_i )}{I_u}, V_i  \in S $}
+\bigskip
+
+The average of the importance score of set S needs to be normalized due to the value is not as straight forward, it depends on the real data. The normalization works by dividing the average of importance score of set S by the absolute maximum of importance score or the absolute upper bound of the importance score $I_u$. 
+% %
+%The value $\sqrt{2}$ is known based on equation \ref{importance_score}. Since the data generated by view is normalized, the range of the probability distribution representing each view is between 0 and 1. Thus, the maximum distance between two values in two different probability distributions can only be at most 1. Since, the sum of all values in a probability distribution can be 1, there can only be at most two pairs of values across two distributions with mutual distance of 1. This results in Euclidian distance can be formulated as $ \sqrt{(1^2+1^2 )}= \sqrt{2} $. As a result, there will be no importance score that more than $\sqrt{2}$. Hence, we use $\sqrt{2}$ as the divisor of the average importance score of set S to obtain the normalized value. For instance, all views in set S has the maximum of importance score $\sqrt{2}$, as a result, the average of set S will be $\sqrt{2}$. Therefore, dividing the average of set S with the absolute maximum of importance score which equal to $\sqrt{2}$ generates a result that equal to 1. 
+
+\textbf{\textit{The diversity score computation}}. There are several diferent diversity functions have been employed in the literature \cite{Vieira2011, Clarke2008}, among which previous research has mostly focused on measuring diversity based on either the average or the minimum of the pairwise distances between elements of set \cite{Wu2014}. We focus on the first of those variants (i.e., average), as it considers all the views in S. Given a distance matric $ D\left(V_i, V_j\right) $ as given in equation 2, the diversity of a set S can be measured by a diversity function $ f\left(S,D\right) $ that captures the dissimilarity between the views in S, defined as:
+\newline
+
+$ f\left(S,D\right)= \dfrac{1}{k\left(k-1\right)}  \sum_{i=1}^{k} \sum_{j>i}^{k} D\left(V_i,V_j\right) ,V_i,V_j  \in S $
+\newline
+
+There is no need to normalize the function for the diversity score of set S $ f\left(S,D\right) $ due to the maximum diversity score of each pairs of views $div\left(V_i,V_j\right)$ never be more than 1 as in equation \ref{diversity_score} and $ f\left(S,D\right) $ uses $k\left(k-1\right)$ as the divisor to make sure that there will be no result that more than 1. 
+
+\textbf{\textit{Hybrid objective utility function}}. In order to capture both importance and diversity in the set of recommended views, we define a hybrid objective function. Specifically, for a set of views S $\subseteq V$ an objective function is formulated as the linear weighted combination of the importance score, $ I\left(S\right) $ and diversity function $ f\left(S,D\right) $ which is defined as:
+\newline
+\begin{equation}
+	F\left(S\right) =  \left(1-\lambda\right).I\left(S\right) + \lambda.f\left(S,D\right)
+	\label{objectif_function}
+\end{equation}
+\newline
+where $ 0 \leq \lambda \geq 1 $ is employed to control the contribution between importance and diversity in the hybrid objective function. The higher values of $  \lambda $ result in a set of more diverse views whereas lower values of $ \lambda $ generate a set of the most important views that might be similar to each other. 
+Given the hybrid objective function, our goal is to find an optimum set of views  $ S^* $ that maximizes the objective function $ F\left(S\right) $: 
+
+\begin{equation}
+	S^* = \underset{\underset{|S|=k} {S \subseteq V}} {\mathrm{argmax}} F\left(S\right) 
+	\label{argmaxF}
+\end{equation}
+
+
+
+\subsubsection{Efficiency}
+In the section before, we defined the problem in terms of quality of the results which hybrid utility function was proposed as the solution. This section defines the issue in terms of efficiency, as explained in the preliminaries section that in case of the modest data which has small number of dimensions, it can generate large number of views. Meanwhile, views that will be presented to users only in small number (top-k views) and all computation will be done on the fly. Hence, we need the scheme that robust in terms of the quality of results as well as in terms of efficiency (costs).
+
+In fact, it has been mentioned a lot in the literatures \cite{Vartak2014, Vartak2015, Ehsan2016} that the main issue of the visualization recommendation systems is the query execution. To deal with the query costs, there are several approaches that proposed, such as query results caching, shared computation among views, combine target and reference query, combination of multiple aggregates, combination of multiple GROUP BY, and parallel query and execution, \cite{Vartak2015, Wu2014}. 
+
+However, in this work, we propose \textit{DiVE} scheme that leverages the properties of importance and diversity metrics to prune a large number of query executions without reducing the quality of the results. The detail is presented in the proposed methods section. 
+
+}
+
+
+
+
+
+

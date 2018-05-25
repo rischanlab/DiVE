@@ -1,0 +1,12 @@
+tradeoff,DiVE-Greedy-Adaptive(0.80),DiVE-Greedy-Adaptive(0.85),DiVE-Greedy-Adaptive(0.90),DiVE-Greedy-Adaptive(0.95),DiVE-Greedy-Adaptive(0.97),DiVE-Greedy-Adaptive(Hypothetical)
+0,1,1,1,1,1,1
+0.1,1,1,1,1,1,1
+0.2,1,1,1,1,1,1
+0.3,1,1,1,1,1,1
+0.4,1,1,1,1,1,1
+0.5,1,1,1,1,1,1
+0.6,1,1,1,1,1,1
+0.7,0.951231,0.969104795,1,1,1,1
+0.8,0.972039029,0.98934839,1,1,1,1
+0.9,0.9912121,0.9992323,1,1,1,1
+1,1,1,1,1,1,1

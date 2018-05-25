@@ -1,0 +1,3 @@
+https://www.alibabacloud.com/blog/Predicting-Heart-Diseases-with-Machine-Learning-218458
+http://www.heart.org/HEARTORG/Conditions/HeartAttack/DiagnosingaHeartAttack/Exercise-Stress-Test_UCM_307474_Article.jsp#mainContent
+http://lucdemortier.github.io/projects/3_mcnulty

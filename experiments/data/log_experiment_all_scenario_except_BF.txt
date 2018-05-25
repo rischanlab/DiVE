@@ -1,0 +1,654 @@
+Main Baseline Objective Function 
+Brute Force, only compute with k = 3 
+
+
+[(8.3806919720372708, (('carrier', 'arrivaldelay', 'MIN'), ('carrier', 'weatherdelay', 'AVG'), ('origin', 'weatherdelay', 'MAX')))]
+Objective Function = 8.38069197204
+it takes=  0:00:10.516883
+
+
+All Algorithms with different k except Brute Force 
+
+
+k = 3
+
+Random
+
+    Attributes       Meassure Function   Utility
+7       carrier  departurdelay      MIN  0.140157
+22       origin  departurdelay      MIN  0.586509
+31  destination   arrivaldelay      AVG  0.253897
+Sum utility = 0.9805625318992925
+Sum diversity = 5.333333333333334 
+Objective Function total = 6.3138958652326265
+it takes=  0:00:00.006518
+
+
+SeeDB
+
+  Attributes       Meassure Function   Utility
+11    carrier   weatherdelay      AVG  0.984298
+28     origin   weatherdelay      MAX  0.971561
+8     carrier  departurdelay      MAX  0.936294
+Sum utility = 2.8921535771246676
+Sum diversity = 5.142857142857143 
+Objective Function total = 8.03501071998181
+it takes=  0:00:00.005504
+
+
+
+MaxDiversity
+
+ Attributes       Meassure Function   Utility
+0     origin   weatherdelay      SUM  0.406264
+1    carrier   weatherdelay      SUM  0.319894
+2     origin  departurdelay      MIN  0.586509
+Sum utility = 1.3126665150033507
+Sum diversity = 5.0476190476190474 
+Objective Function total = 6.360285562622398
+it takes=  0:00:00.011530
+
+
+Swap UB = 0.3
+
+   index Attributes       Meassure Function   Utility
+0     26     origin   weatherdelay      AVG  0.891266
+1     17     origin   arrivaldelay      MIN  0.827442
+2     20     origin  departurdelay      SUM  0.801825
+Sum utility = 2.520534181911349
+Sum diversity = 5.333333333333333 
+Objective Function total = 7.853867515244682
+it takes=  0:00:00.008021
+
+
+
+k = 5
+
+
+Random
+
+  Attributes       Meassure Function   Utility
+26       origin   weatherdelay      AVG  0.891266
+32  destination   arrivaldelay      MIN  0.456841
+2       carrier   arrivaldelay      MIN  0.934487
+20       origin  departurdelay      SUM  0.801825
+37  destination  departurdelay      MIN  0.124426
+Sum utility = 3.208845359014809
+Sum diversity = 17.80952380952381 
+Objective Function total = 21.01836916853862
+it takes=  0:00:00.006016
+
+
+
+SeeDB
+
+  Attributes       Meassure Function   Utility
+11    carrier   weatherdelay      AVG  0.984298
+28     origin   weatherdelay      MAX  0.971561
+8     carrier  departurdelay      MAX  0.936294
+2     carrier   arrivaldelay      MIN  0.934487
+26     origin   weatherdelay      AVG  0.891266
+Sum utility = 4.717906923287394
+Sum diversity = 17.238095238095237 
+Objective Function total = 21.95600216138263
+it takes=  0:00:00.005019
+
+
+MaxDiversity
+
+ Attributes      Meassure Function   Utility
+0    carrier  arrivaldelay      MIN  0.934487
+1     origin  weatherdelay      MIN  0.753987
+2    carrier  weatherdelay      MIN  0.472473
+3    carrier  arrivaldelay      MAX  0.750267
+4     origin  weatherdelay      MAX  0.971561
+Sum utility = 3.8827755080955595
+Sum diversity = 16.19047619047619 
+Objective Function total = 20.07325169857175
+it takes=  0:00:00.012024
+
+
+
+Swap UB = 0.3 
+
+index Attributes       Meassure Function   Utility
+0     20     origin  departurdelay      SUM  0.801825
+1      4    carrier   arrivaldelay      STD  0.779472
+2     27     origin   weatherdelay      MIN  0.753987
+3      9    carrier  departurdelay      STD  0.751734
+4      3    carrier   arrivaldelay      MAX  0.750267
+Sum utility = 3.8372870239800694
+Sum diversity = 18.333333333333332 
+Objective Function total = 22.170620357313403
+it takes=  0:00:00.015627
+
+
+
+
+
+k = 7
+
+
+Random
+
+ Attributes       Meassure Function   Utility
+3       carrier   arrivaldelay      MAX  0.750267
+4       carrier   arrivaldelay      STD  0.779472
+38  destination  departurdelay      MAX  0.145233
+5       carrier  departurdelay      SUM  0.732586
+39  destination  departurdelay      STD  0.408176
+26       origin   weatherdelay      AVG  0.891266
+15       origin   arrivaldelay      SUM  0.120136
+Sum utility = 3.827137768248555
+Sum diversity = 37.80952380952381 
+Objective Function total = 41.636661577772365
+it takes=  0:00:00.006005
+
+
+SeeDB
+
+ Attributes       Meassure Function   Utility
+11    carrier   weatherdelay      AVG  0.984298
+28     origin   weatherdelay      MAX  0.971561
+8     carrier  departurdelay      MAX  0.936294
+2     carrier   arrivaldelay      MIN  0.934487
+26     origin   weatherdelay      AVG  0.891266
+17     origin   arrivaldelay      MIN  0.827442
+20     origin  departurdelay      SUM  0.801825
+Sum utility = 6.34717462534863
+Sum diversity = 36.85714285714286 
+Objective Function total = 43.20431748249149
+it takes=  0:00:00.004986
+
+
+MaxDiversity
+
+    Attributes       Meassure Function   Utility
+0  destination   weatherdelay      SUM  0.003094
+1       origin   weatherdelay      AVG  0.891266
+2       origin  departurdelay      AVG  0.379211
+3  destination  departurdelay      SUM  0.304977
+4       origin  departurdelay      SUM  0.801825
+5  destination   weatherdelay      AVG  0.333256
+6       origin   weatherdelay      MIN  0.753987
+Sum utility = 3.4676175889823644
+Sum diversity = 34.47619047619048 
+Objective Function total = 37.943808065172846
+it takes=  0:00:00.012003
+
+
+
+Swap UB = 0.3 
+
+  index   Attributes       Meassure Function   Utility
+0     28       origin   weatherdelay      MAX  0.971561
+1     27       origin   weatherdelay      MIN  0.753987
+2      9      carrier  departurdelay      STD  0.751734
+3      3      carrier   arrivaldelay      MAX  0.750267
+4      5      carrier  departurdelay      SUM  0.732586
+5     14      carrier   weatherdelay      STD  0.704273
+6     36  destination  departurdelay      AVG  0.654646
+Sum utility = 5.31905550926231
+Sum diversity = 38.5 
+Objective Function total = 43.81905550926231
+it takes=  0:00:00
+
+
+
+k = 10
+
+
+Random
+
+  Attributes       Meassure Function   Utility
+37  destination  departurdelay      MIN  0.124426
+10      carrier   weatherdelay      SUM  0.319894
+1       carrier   arrivaldelay      AVG  0.093387
+3       carrier   arrivaldelay      MAX  0.750267
+12      carrier   weatherdelay      MIN  0.472473
+7       carrier  departurdelay      MIN  0.140157
+11      carrier   weatherdelay      AVG  0.984298
+17       origin   arrivaldelay      MIN  0.827442
+35  destination  departurdelay      SUM  0.304977
+36  destination  departurdelay      AVG  0.654646
+Sum utility = 4.671966153372873
+Sum diversity = 77.61904761904763 
+Objective Function total = 82.29101377242051
+it takes=  0:00:00.007020
+
+SeeDB
+
+ Attributes       Meassure Function   Utility
+11    carrier   weatherdelay      AVG  0.984298
+28     origin   weatherdelay      MAX  0.971561
+8     carrier  departurdelay      MAX  0.936294
+2     carrier   arrivaldelay      MIN  0.934487
+26     origin   weatherdelay      AVG  0.891266
+17     origin   arrivaldelay      MIN  0.827442
+20     origin  departurdelay      SUM  0.801825
+4     carrier   arrivaldelay      STD  0.779472
+27     origin   weatherdelay      MIN  0.753987
+9     carrier  departurdelay      STD  0.751734
+Sum utility = 8.632368859323648
+Sum diversity = 78.2857142857143 
+Objective Function total = 86.91808314503795
+it takes=  0:00:00.006016
+
+
+MaxDiversity
+
+  Attributes       Meassure Function   Utility
+0  destination   weatherdelay      SUM  0.003094
+1  destination   arrivaldelay      MAX  0.003837
+2  destination   arrivaldelay      STD  0.274044
+3  destination   arrivaldelay      MIN  0.456841
+4  destination  departurdelay      SUM  0.304977
+5  destination  departurdelay      MAX  0.145233
+6  destination   weatherdelay      STD  0.325258
+7  destination   arrivaldelay      AVG  0.253897
+8  destination   weatherdelay      MIN  0.142475
+9  destination   weatherdelay      AVG  0.333256
+Sum utility = 2.242912271055918
+Sum diversity = 70.2857142857143 
+Objective Function total = 72.52862655677022
+it takes=  0:00:00.013035
+
+
+Swap UB = 0.3 
+
+ index   Attributes       Meassure Function   Utility
+0     11      carrier   weatherdelay      AVG  0.984298
+1     28       origin   weatherdelay      MAX  0.971561
+2     26       origin   weatherdelay      AVG  0.891266
+3     17       origin   arrivaldelay      MIN  0.827442
+4     20       origin  departurdelay      SUM  0.801825
+5     27       origin   weatherdelay      MIN  0.753987
+6      5      carrier  departurdelay      SUM  0.732586
+7     14      carrier   weatherdelay      STD  0.704273
+8     36  destination  departurdelay      AVG  0.654646
+9     22       origin  departurdelay      MIN  0.586509
+Sum utility = 7.908394570980425
+Sum diversity = 80.33333333333333 
+Objective Function total = 88.24172790431375
+it takes=  0:00:00.015655
+
+
+
+
+k = 15
+
+Random 
+
+  Attributes       Meassure Function   Utility
+27       origin   weatherdelay      MIN  0.753987
+20       origin  departurdelay      SUM  0.801825
+39  destination  departurdelay      STD  0.408176
+23       origin  departurdelay      MAX  0.072072
+5       carrier  departurdelay      SUM  0.732586
+32  destination   arrivaldelay      MIN  0.456841
+29       origin   weatherdelay      STD  0.086007
+8       carrier  departurdelay      MAX  0.936294
+14      carrier   weatherdelay      STD  0.704273
+26       origin   weatherdelay      AVG  0.891266
+19       origin   arrivaldelay      STD  0.329110
+11      carrier   weatherdelay      AVG  0.984298
+33  destination   arrivaldelay      MAX  0.003837
+7       carrier  departurdelay      MIN  0.140157
+17       origin   arrivaldelay      MIN  0.827442
+Sum utility = 8.128172484951419
+Sum diversity = 184.952380952381 
+Objective Function total = 193.0805534373324
+it takes=  0:00:00.007019
+
+
+SeeDB
+
+ Attributes       Meassure Function   Utility
+11      carrier   weatherdelay      AVG  0.984298
+28       origin   weatherdelay      MAX  0.971561
+8       carrier  departurdelay      MAX  0.936294
+2       carrier   arrivaldelay      MIN  0.934487
+26       origin   weatherdelay      AVG  0.891266
+17       origin   arrivaldelay      MIN  0.827442
+20       origin  departurdelay      SUM  0.801825
+4       carrier   arrivaldelay      STD  0.779472
+27       origin   weatherdelay      MIN  0.753987
+9       carrier  departurdelay      STD  0.751734
+3       carrier   arrivaldelay      MAX  0.750267
+5       carrier  departurdelay      SUM  0.732586
+14      carrier   weatherdelay      STD  0.704273
+36  destination  departurdelay      AVG  0.654646
+22       origin  departurdelay      MIN  0.586509
+Sum utility = 12.060650036194513
+Sum diversity = 182.2857142857143 
+Objective Function total = 194.34636432190882
+it takes=  0:00:00.007018
+
+
+
+MaxDiversity
+
+Attributes       Meassure Function   Utility
+0   destination  departurdelay      MIN  0.124426
+1   destination  departurdelay      MAX  0.145233
+2        origin   arrivaldelay      MAX  0.008753
+3        origin  departurdelay      MAX  0.072072
+4   destination   arrivaldelay      MIN  0.456841
+5        origin   arrivaldelay      MIN  0.827442
+6   destination   weatherdelay      MAX  0.564563
+7        origin  departurdelay      SUM  0.801825
+8        origin   weatherdelay      MIN  0.753987
+9       carrier   arrivaldelay      MAX  0.750267
+10       origin  departurdelay      AVG  0.379211
+11  destination   arrivaldelay      STD  0.274044
+12  destination   arrivaldelay      AVG  0.253897
+13      carrier  departurdelay      MIN  0.140157
+14  destination   arrivaldelay      SUM  0.405784
+Sum utility = 5.958502339266395
+Sum diversity = 180.76190476190476 
+Objective Function total = 186.72040710117116
+it takes=  0:00:00.014037
+
+
+Swap UB = 0.3 
+
+index   Attributes       Meassure Function   Utility
+0      11      carrier   weatherdelay      AVG  0.984298
+1      28       origin   weatherdelay      MAX  0.971561
+2       8      carrier  departurdelay      MAX  0.936294
+3       2      carrier   arrivaldelay      MIN  0.934487
+4      26       origin   weatherdelay      AVG  0.891266
+5      17       origin   arrivaldelay      MIN  0.827442
+6      20       origin  departurdelay      SUM  0.801825
+7       4      carrier   arrivaldelay      STD  0.779472
+8      27       origin   weatherdelay      MIN  0.753987
+9       9      carrier  departurdelay      STD  0.751734
+10      5      carrier  departurdelay      SUM  0.732586
+11     14      carrier   weatherdelay      STD  0.704273
+12     36  destination  departurdelay      AVG  0.654646
+13     22       origin  departurdelay      MIN  0.586509
+14     12      carrier   weatherdelay      MIN  0.472473
+Sum utility = 11.782855282893447
+Sum diversity = 187.8888888888889 
+Objective Function total = 199.67174417178236
+it takes=  0:00:00.015654
+
+
+
+
+k = 20
+
+
+Random
+
+   Attributes       Meassure Function   Utility
+42  destination   weatherdelay      MIN  0.142475
+19       origin   arrivaldelay      STD  0.329110
+24       origin  departurdelay      STD  0.323125
+33  destination   arrivaldelay      MAX  0.003837
+15       origin   arrivaldelay      SUM  0.120136
+0       carrier   arrivaldelay      SUM  0.010906
+22       origin  departurdelay      MIN  0.586509
+41  destination   weatherdelay      AVG  0.333256
+6       carrier  departurdelay      AVG  0.024062
+2       carrier   arrivaldelay      MIN  0.934487
+28       origin   weatherdelay      MAX  0.971561
+7       carrier  departurdelay      MIN  0.140157
+36  destination  departurdelay      AVG  0.654646
+35  destination  departurdelay      SUM  0.304977
+27       origin   weatherdelay      MIN  0.753987
+39  destination  departurdelay      STD  0.408176
+16       origin   arrivaldelay      AVG  0.112689
+38  destination  departurdelay      MAX  0.145233
+18       origin   arrivaldelay      MAX  0.008753
+37  destination  departurdelay      MIN  0.124426
+Sum utility = 6.432509115481105
+Sum diversity = 331.4285714285714 
+Objective Function total = 337.86108054405247
+it takes=  0:00:00.009017
+
+
+SeeDB
+
+ Attributes       Meassure Function   Utility
+11      carrier   weatherdelay      AVG  0.984298
+28       origin   weatherdelay      MAX  0.971561
+8       carrier  departurdelay      MAX  0.936294
+2       carrier   arrivaldelay      MIN  0.934487
+26       origin   weatherdelay      AVG  0.891266
+17       origin   arrivaldelay      MIN  0.827442
+20       origin  departurdelay      SUM  0.801825
+4       carrier   arrivaldelay      STD  0.779472
+27       origin   weatherdelay      MIN  0.753987
+9       carrier  departurdelay      STD  0.751734
+3       carrier   arrivaldelay      MAX  0.750267
+5       carrier  departurdelay      SUM  0.732586
+14      carrier   weatherdelay      STD  0.704273
+36  destination  departurdelay      AVG  0.654646
+22       origin  departurdelay      MIN  0.586509
+43  destination   weatherdelay      MAX  0.564563
+12      carrier   weatherdelay      MIN  0.472473
+32  destination   arrivaldelay      MIN  0.456841
+13      carrier   weatherdelay      MAX  0.451762
+39  destination  departurdelay      STD  0.408176
+Sum utility = 14.414464244205783
+Sum diversity = 330.7619047619048 
+Objective Function total = 345.1763690061106
+it takes=  0:00:00.007019
+
+
+MaxDiversity
+
+ Attributes       Meassure Function   Utility
+0       carrier   arrivaldelay      AVG  0.093387
+1   destination   arrivaldelay      SUM  0.405784
+2        origin   arrivaldelay      SUM  0.120136
+3        origin   arrivaldelay      AVG  0.112689
+4       carrier   arrivaldelay      STD  0.779472
+5   destination   arrivaldelay      MAX  0.003837
+6   destination   arrivaldelay      STD  0.274044
+7       carrier   arrivaldelay      MAX  0.750267
+8   destination   arrivaldelay      MIN  0.456841
+9       carrier   arrivaldelay      MIN  0.934487
+10      carrier   weatherdelay      SUM  0.319894
+11  destination  departurdelay      AVG  0.654646
+12      carrier  departurdelay      SUM  0.732586
+13  destination   weatherdelay      AVG  0.333256
+14       origin   arrivaldelay      MAX  0.008753
+15  destination   weatherdelay      SUM  0.003094
+16      carrier   weatherdelay      AVG  0.984298
+17       origin   arrivaldelay      STD  0.329110
+18       origin   arrivaldelay      MIN  0.827442
+19  destination  departurdelay      SUM  0.304977
+Sum utility = 8.42900129180228
+Sum diversity = 324.2857142857144 
+Objective Function total = 332.7147155775167
+it takes=  0:00:00.016129
+
+
+Swap UB = 0.3 
+
+ index   Attributes       Meassure Function   Utility
+0      11      carrier   weatherdelay      AVG  0.984298
+1      28       origin   weatherdelay      MAX  0.971561
+2       8      carrier  departurdelay      MAX  0.936294
+3       2      carrier   arrivaldelay      MIN  0.934487
+4      26       origin   weatherdelay      AVG  0.891266
+5      17       origin   arrivaldelay      MIN  0.827442
+6      20       origin  departurdelay      SUM  0.801825
+7       4      carrier   arrivaldelay      STD  0.779472
+8      27       origin   weatherdelay      MIN  0.753987
+9       9      carrier  departurdelay      STD  0.751734
+10      3      carrier   arrivaldelay      MAX  0.750267
+11      5      carrier  departurdelay      SUM  0.732586
+12     14      carrier   weatherdelay      STD  0.704273
+13     36  destination  departurdelay      AVG  0.654646
+14     22       origin  departurdelay      MIN  0.586509
+15     43  destination   weatherdelay      MAX  0.564563
+16     12      carrier   weatherdelay      MIN  0.472473
+17     32  destination   arrivaldelay      MIN  0.456841
+18     13      carrier   weatherdelay      MAX  0.451762
+19     39  destination  departurdelay      STD  0.408176
+Sum utility = 14.414464244205783
+Sum diversity = 342.3888888888889 
+Objective Function total = 356.8033531330947
+it takes=  0:00:00
+
+
+k = 30
+
+Random 
+
+ Attributes       Meassure Function   Utility
+35  destination  departurdelay      SUM  0.304977
+5       carrier  departurdelay      SUM  0.732586
+42  destination   weatherdelay      MIN  0.142475
+29       origin   weatherdelay      STD  0.086007
+36  destination  departurdelay      AVG  0.654646
+33  destination   arrivaldelay      MAX  0.003837
+19       origin   arrivaldelay      STD  0.329110
+31  destination   arrivaldelay      AVG  0.253897
+24       origin  departurdelay      STD  0.323125
+6       carrier  departurdelay      AVG  0.024062
+22       origin  departurdelay      MIN  0.586509
+4       carrier   arrivaldelay      STD  0.779472
+18       origin   arrivaldelay      MAX  0.008753
+43  destination   weatherdelay      MAX  0.564563
+38  destination  departurdelay      MAX  0.145233
+21       origin  departurdelay      AVG  0.379211
+13      carrier   weatherdelay      MAX  0.451762
+39  destination  departurdelay      STD  0.408176
+17       origin   arrivaldelay      MIN  0.827442
+8       carrier  departurdelay      MAX  0.936294
+37  destination  departurdelay      MIN  0.124426
+16       origin   arrivaldelay      AVG  0.112689
+11      carrier   weatherdelay      AVG  0.984298
+41  destination   weatherdelay      AVG  0.333256
+2       carrier   arrivaldelay      MIN  0.934487
+40  destination   weatherdelay      SUM  0.003094
+27       origin   weatherdelay      MIN  0.753987
+14      carrier   weatherdelay      STD  0.704273
+26       origin   weatherdelay      AVG  0.891266
+1       carrier   arrivaldelay      AVG  0.093387
+Sum utility = 12.877301678341485
+Sum diversity = 760.7619047619049 
+Objective Function total = 773.6392064402464
+it takes=  0:00:00.009024
+
+
+SeeDB
+
+ Attributes       Meassure Function   Utility
+11      carrier   weatherdelay      AVG  0.984298
+28       origin   weatherdelay      MAX  0.971561
+8       carrier  departurdelay      MAX  0.936294
+2       carrier   arrivaldelay      MIN  0.934487
+26       origin   weatherdelay      AVG  0.891266
+17       origin   arrivaldelay      MIN  0.827442
+20       origin  departurdelay      SUM  0.801825
+4       carrier   arrivaldelay      STD  0.779472
+27       origin   weatherdelay      MIN  0.753987
+9       carrier  departurdelay      STD  0.751734
+3       carrier   arrivaldelay      MAX  0.750267
+5       carrier  departurdelay      SUM  0.732586
+14      carrier   weatherdelay      STD  0.704273
+36  destination  departurdelay      AVG  0.654646
+22       origin  departurdelay      MIN  0.586509
+43  destination   weatherdelay      MAX  0.564563
+12      carrier   weatherdelay      MIN  0.472473
+32  destination   arrivaldelay      MIN  0.456841
+13      carrier   weatherdelay      MAX  0.451762
+39  destination  departurdelay      STD  0.408176
+25       origin   weatherdelay      SUM  0.406264
+30  destination   arrivaldelay      SUM  0.405784
+21       origin  departurdelay      AVG  0.379211
+41  destination   weatherdelay      AVG  0.333256
+19       origin   arrivaldelay      STD  0.329110
+44  destination   weatherdelay      STD  0.325258
+24       origin  departurdelay      STD  0.323125
+10      carrier   weatherdelay      SUM  0.319894
+35  destination  departurdelay      SUM  0.304977
+34  destination   arrivaldelay      STD  0.274044
+Sum utility = 17.815386852415486
+Sum diversity = 761.6190476190475 
+Objective Function total = 779.434434471463
+it takes=  0:00:00.009052
+
+
+
+MaxDiversity
+
+ Attributes       Meassure Function   Utility
+0       carrier  departurdelay      AVG  0.024062
+1        origin   weatherdelay      AVG  0.891266
+2   destination  departurdelay      AVG  0.654646
+3   destination   weatherdelay      AVG  0.333256
+4       carrier   arrivaldelay      AVG  0.093387
+5        origin   arrivaldelay      AVG  0.112689
+6       carrier   weatherdelay      MIN  0.472473
+7       carrier   weatherdelay      STD  0.704273
+8       carrier   weatherdelay      MAX  0.451762
+9        origin  departurdelay      MAX  0.072072
+10       origin  departurdelay      STD  0.323125
+11      carrier   weatherdelay      SUM  0.319894
+12       origin  departurdelay      MIN  0.586509
+13       origin  departurdelay      SUM  0.801825
+14      carrier  departurdelay      MAX  0.936294
+15       origin   weatherdelay      MIN  0.753987
+16      carrier  departurdelay      STD  0.751734
+17       origin   weatherdelay      MAX  0.971561
+18  destination   arrivaldelay      AVG  0.253897
+19      carrier  departurdelay      MIN  0.140157
+20       origin   weatherdelay      STD  0.086007
+21       origin   weatherdelay      SUM  0.406264
+22      carrier  departurdelay      SUM  0.732586
+23       origin   arrivaldelay      STD  0.329110
+24  destination  departurdelay      MIN  0.124426
+25  destination   weatherdelay      SUM  0.003094
+26  destination  departurdelay      SUM  0.304977
+27       origin   arrivaldelay      MIN  0.827442
+28      carrier   arrivaldelay      MAX  0.750267
+29  destination  departurdelay      STD  0.408176
+Sum utility = 13.621220078638999
+Sum diversity = 757.4285714285718 
+Objective Function total = 771.0497915072108
+it takes=  0:00:00.019045
+
+
+Swap UB = 0.3
+
+  index   Attributes       Meassure Function   Utility
+0      11      carrier   weatherdelay      AVG  0.984298
+1      28       origin   weatherdelay      MAX  0.971561
+2       8      carrier  departurdelay      MAX  0.936294
+3       2      carrier   arrivaldelay      MIN  0.934487
+4      26       origin   weatherdelay      AVG  0.891266
+5      17       origin   arrivaldelay      MIN  0.827442
+6      20       origin  departurdelay      SUM  0.801825
+7       4      carrier   arrivaldelay      STD  0.779472
+8      27       origin   weatherdelay      MIN  0.753987
+9       9      carrier  departurdelay      STD  0.751734
+10      3      carrier   arrivaldelay      MAX  0.750267
+11      5      carrier  departurdelay      SUM  0.732586
+12     14      carrier   weatherdelay      STD  0.704273
+13     36  destination  departurdelay      AVG  0.654646
+14     22       origin  departurdelay      MIN  0.586509
+15     43  destination   weatherdelay      MAX  0.564563
+16     12      carrier   weatherdelay      MIN  0.472473
+17     32  destination   arrivaldelay      MIN  0.456841
+18     13      carrier   weatherdelay      MAX  0.451762
+19     39  destination  departurdelay      STD  0.408176
+20     25       origin   weatherdelay      SUM  0.406264
+21     30  destination   arrivaldelay      SUM  0.405784
+22     21       origin  departurdelay      AVG  0.379211
+23     41  destination   weatherdelay      AVG  0.333256
+24     19       origin   arrivaldelay      STD  0.329110
+25     44  destination   weatherdelay      STD  0.325258
+26     24       origin  departurdelay      STD  0.323125
+27     10      carrier   weatherdelay      SUM  0.319894
+28     35  destination  departurdelay      SUM  0.304977
+29     34  destination   arrivaldelay      STD  0.274044
+Sum utility = 17.815386852415486
+Sum diversity = 787.1666666666666 
+Objective Function total = 804.9820535190821
+it takes=  0:00:00.015627
