@@ -34,14 +34,14 @@ def Greedy_Return_df(df, k):
 
 
 
-k=5
+k=25
 
-xl = pd.ExcelFile("cp_asymtomatic.xlsx")
+xl = pd.ExcelFile("results_carrier_US.xlsx")
 df = xl.parse("Sheet1", header=0)
 
 tradeoff_list = [0.0, 0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8, 0.82,0.84,0.86,0.88,0.9,0.92,0.94,0.96,0.98,1.0]
 #number_of_k = [5,15,25,35] #
-output = "static_cp_asymtomatic.csv"
+output = "swap_static_results_carrier_US_25.csv"
 df_greedy = Greedy_Return_df(df,k)
 
 def util_func_d(S_list):
