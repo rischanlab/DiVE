@@ -1,0 +1,10 @@
+C:\Anaconda\python.exe C:\Users\uqrmafru\Dropbox\PhD_papers\DiVE\experiments\programs\SeeDB_python\DiViz_zomato\main.py rating_text='Excellent'%*
+C:\Anaconda\python.exe C:\Users\uqrmafru\Dropbox\PhD_papers\DiVE\experiments\programs\SeeDB_python\DiViz_zomato\main.py rating_text='Very_Good'%*
+C:\Anaconda\python.exe C:\Users\uqrmafru\Dropbox\PhD_papers\DiVE\experiments\programs\SeeDB_python\DiViz_zomato\main.py rating_text='Good'%*
+C:\Anaconda\python.exe C:\Users\uqrmafru\Dropbox\PhD_papers\DiVE\experiments\programs\SeeDB_python\DiViz_zomato\main.py rating_text='Average'%*
+C:\Anaconda\python.exe C:\Users\uqrmafru\Dropbox\PhD_papers\DiVE\experiments\programs\SeeDB_python\DiViz_zomato\main.py rating_text='Poor'%*
+C:\Anaconda\python.exe C:\Users\uqrmafru\Dropbox\PhD_papers\DiVE\experiments\programs\SeeDB_python\DiViz_zomato\main.py rating_text='Not_rated'%*
+C:\Anaconda\python.exe C:\Users\uqrmafru\Dropbox\PhD_papers\DiVE\experiments\programs\SeeDB_python\DiViz_zomato\main.py has_table_booking='Yes'%*
+C:\Anaconda\python.exe C:\Users\uqrmafru\Dropbox\PhD_papers\DiVE\experiments\programs\SeeDB_python\DiViz_zomato\main.py has_table_booking='No'%*
+C:\Anaconda\python.exe C:\Users\uqrmafru\Dropbox\PhD_papers\DiVE\experiments\programs\SeeDB_python\DiViz_zomato\main.py has_online_delivery='Yes'%*
+C:\Anaconda\python.exe C:\Users\uqrmafru\Dropbox\PhD_papers\DiVE\experiments\programs\SeeDB_python\DiViz_zomato\main.py has_online_delivery='No'%*

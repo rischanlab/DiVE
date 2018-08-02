@@ -7,11 +7,21 @@ CREATE TABLE airbnb (
   Room_Type varchar(25),
   Zipcode varchar(17),
   Beds integer,
-  Number_of_Records integer,
   Number_Of_Reviews integer,
   Price bigint
 )
 
+
+UPDATE 
+   airbnb
+SET 
+   neighbourhood = REPLACE (
+   neighbourhood,
+ 'Staten Island',
+ 'Staten_Island'
+   );
+
+   
 INSERT INTO airbnb (ID,Neighbourhood,Property_Type,Room_Type,Zipcode,Beds,Number_of_Records,Number_Of_Reviews,Price)
 VALUES
 (500,Manhattan,Apartment,Private_room,10036,3,1,39,549),

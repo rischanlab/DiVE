@@ -31,7 +31,6 @@ Greedy MaxMin and Greedy Top1 are very similar, both algorithms have same logics
 In case of MaxMin pruning algorithm, $ Umax $ of all candidate views in $ X $ are computed using actual score of diversity and maximum bound of importance score while $ Umin $ of all candidate views in $ X $ are computed using actual score of diversity and $ 0 $ as the importance score. All views in $ X $ are pruned while the value of $ Umax $ less than the maximum of $ Umin $. The view in $ X $ is executed one by one from the top, since the actual score of importance has been known, the actual utility score of the view can be calculated. This actual utility score of view will be used as the maximum of $ Umin $. Since, more views are executed the higher actual utility will be used as the maximum of $ Umin $ and more views can be pruned. 
 
 Meanwhile, Top1 algorithm directly uses the total objective function of the set $ F(S) $. After all candidate views in $ X $ are sorted based on $ setDist $, the view is executed one by one start from the top. While the importance score of first executed view has been known, the $ F(S \cup X[0]) $ can be calculated and this objective function as the current objective function $ F(S) $. Then, $ maxF(S \cup X[i]) $ of all remaining views in X are calculated using actual diversity score and maximum bound of importance score. If $ maxF(S \cup X[i]) < F(S) $ then it is guaranteed that the actual objective function to be less than the current objective function $ F(S) $ and those views can be pruned. The current objective function $  F(S) $ is updated while the next $ F(S) $ of executed query has higher score than the current.
-This experiment use Flights dataset with 5 queries, Figure \ref{fig:static-pruning} shows that both algorithms have similar performance.
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=4.0in]{figures/no_pruning_vs_static_extend}
@@ -43,6 +42,9 @@ This experiment use Flights dataset with 5 queries, Figure \ref{fig:static-pruni
 \end{figure}
 
 For the rest, we will use Top1 instead of MaxMin pruning due to we also have Swap technique that implement Top1 approach. The reason why we still need swap is because Greedy starts with small number of views in the initialization. Only two views as the set $ S $. Hence, while calculating the $ setDist $ of each views in $ X $, there are a lot of views have same score that it may decrease the chance of pruning. Moreover, there is no guarantee that two most distant views which selected by Greedy as the initialization have high importance score and there is no way to replace those two views. However, Swap has bigger number of views in the initialization (e.g. five views). While calculating the $ setDist $ of views in $ X $, the chance of views have same score is lower than Greedy. Additionally, swap also has a replacing mechanism that can replace low quality views in the current set with the better one. 
+
+
+In this experiment, we used Flights dataset with 5 queries, Figure \ref{fig:static-pruning} shows top 1 algorithm which used Greedy and Swap techniques have similar performance.
 
 
 
@@ -62,7 +64,7 @@ Until now, I am not sure if there is a bounded distance function that can be use
 
 \subsection{Euclidean Maximum bound}
 For the general case, Euclidean distance $d$ is defined as following: 
-$d = \sqrt{\sum{(x-y)^2}}$, where $ \sum{(x-y)^2} = \sum x^2 + \sum y^2 - 2\sum xy$. Given that in probability vectors all values are nonnegative, $d$ is max when the last term is zero, then $d = \sum x^2 + \sum y^2$. The theoretical maximum is attained when $2\sum xy = 0$ and $\sqrt{2}$ as the maximum theoretical bound can be proven as following: 
+$d = \sqrt{\sum{(x-y)^2}}$, where $ \sum{(x-y)^2} = \sum x^2 + \sum y^2 - 2\sum xy$. Given that in probability vectors all values are nonnegative, $d$ is max when the last term is zero, then $d = \sum x^2 + \sum y^2$. All values are between 0 and 1 (sum up to 1), $\sum x = \sum y = 1$. The theoretical maximum is attained when $2\sum xy = 0$ and $\sqrt{2}$ as the maximum theoretical bound can be proven as following: 
 \newline
 $ \sqrt{\sum{(x-y)^2}} \leq \sqrt{\sum{(x)^2} + \sum{(y)^2}} $
 \newline

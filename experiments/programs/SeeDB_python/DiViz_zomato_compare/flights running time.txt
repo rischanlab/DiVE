@@ -1,0 +1,94 @@
+flights dataset
+
+k = 5
+Query time: 12.312626361846924
+Utility time: 0.013214111328125
+Total view processing time: 12.32636308670044
+Diversity time: 0.035309553146362305
+
+k = 15
+
+Query time: 12.363744020462036
+Utility time: 0.01160740852355957
+Total view processing time: 12.37838077545166
+Diversity time: 0.03960704803466797
+
+k = 25
+
+Query time: 12.2790846824646
+Utility time: 0.01309823989868164
+Total view processing time: 12.39366135597229
+Diversity time: 0.05464649200439453
+
+
+
+k = 35
+
+Query time: 12.438252925872803
+Utility time: 0.010619163513183594
+Total view processing time: 12.450368404388428
+Diversity time: 0.06931209564208984
+
+
+
+Superstore dataset
+
+k = 5
+Query time: 1.1207022666931152
+Utility time: 0.30123281478881836
+Total view processing time: 1.424879550933838
+Diversity time: 0.0715644359588623
+
+k = 15
+
+Query time: 0.914325475692749
+Utility time: 0.23178339004516602
+Total view processing time: 1.1511273384094238
+Diversity time: 0.07395195960998535
+
+k = 25
+
+Query time: 1.1716647148132324
+Utility time: 0.2977864742279053
+Total view processing time: 1.4761812686920166
+Diversity time: 0.07222938537597656
+
+
+
+k = 35
+
+Query time: 1.1505043506622314
+Utility time: 0.2845804691314697
+Total view processing time: 1.4412589073181152
+Diversity time: 0.09224700927734375
+
+
+Heart disease dataset
+
+k = 5
+Query time: 0.04687857627868652
+Utility time: 0.001003265380859375
+Total view processing time: 0.048911094665527344
+Diversity time: 0.02710700035095215
+
+k = 15
+
+Query time: 0.027857303619384766
+Utility time: 0.0020322799682617188
+Total view processing time: 0.03189516067504883
+Diversity time: 0.03910422325134277
+
+k = 25
+
+Query time: 0.02724146842956543
+Utility time: 0.001003265380859375
+Total view processing time: 0.028244733810424805
+Diversity time: 0.05705118179321289
+
+
+k = 35
+
+Query time: 0.02790069580078125
+Utility time: 0.0010027885437011719
+Total view processing time: 0.029885053634643555
+Diversity time: 0.08218598365783691
