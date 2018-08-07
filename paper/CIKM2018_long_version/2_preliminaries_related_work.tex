@@ -1,0 +1,148 @@
+% ============================================== %
+% PRELIMINARIES %
+% ============================================== %
+
+%\note{general notes:
+%
+%1-use label{} to give each section and subsection a reference - important for roadmap and referring to sections.
+%
+%2-For equations, no skips, no newlines and it should be one pair of \$ for each equation - some has \$ for each symbol, makes it hard to edit 
+%
+%3-add all missing references and follow the standard short format
+%}
+
+\section{PRELIMINARIES AND RELATED WORK}\label{sec:preliminaries_related_work}
+
+%\mas{preamble} 
+
+%\subsection{Recommendation of Aggregate Views}
+
+% Visualization Recommendation System explanation %
+Several recent research efforts have been directed to the challenging task of recommending aggregate views that reveal interesting data-driven insights (e.g., \cite{Vartak2014,Vartak2015,Ehsan2016}).
+%
+As in previous work, we assume a similar model, in which a visual data exploration session starts with an analyst submitting a query $Q$ on a multi-dimensional database $D_B$.
+%
+Essentially, $Q$ selects a subset $D_Q$ from $D_B$ by specifying a query predicate $T$.
+%
+Hence, $Q$ is  defined as:
+%
+{\tt $Q$: SELECT * FROM $D_B$ WHERE $T$;}
+
+
+
+Ideally, the analysts would like to generate some aggregate views (e.g., bar charts or scatter plots) that unearth some valuable insights from the selected data subset $D_Q$. 
+%
+However, achieving that goal is only possible if the analyst knows exactly what to look for!  
+%
+That is, if they know the parameters, which specify some aggregate views that lead to those valuable insights (e.g., aggregate functions, grouping attributes, etc.). 
+%
+%Meanwhile, such parameters only become clear in ``hindsight'' after spending long time exploring the underlying database.
+%
+Hence, the goal of existing work, such as \cite{Viegas2007,Key2012,Vartak2014,Vartak2015,Ehsan2016}, is to {\em automatically} recommend such aggregate views. 
+%
+
+To specify and recommend such views, as in previous work, we consider a multi-dimensional database $D_B$, which consists of a set of dimensional attributes $\mathbb{A}$ and a set of measure attributes $\mathbb{M}$. 
+%
+Also, let $\mathbb{F}$ be a set of possible aggregate functions over measure attributes. %, such as {\tt COUNT, AVG, SUM, MIN and MAX}. 
+%
+Hence, specifying different combinations of dimension and measure attributes along with various aggregate functions, generates a set of possible views $\mathbb{V}$ over the selected dataset $D_Q$.
+%
+For instance, a possible aggregate view $V_i$ is specified by a tuple <$ A_i$, $ M_i$, $ F_i$>, where $A_i \in \mathbb{A}$, $M_i \in \mathbb{M}$, and  $F_i \in \mathbb{F}$, and it can be formally defined as:
+%
+{\tt $V_i$: SELECT $A_i$, $F_i$ ($M_i$) FROM $D_B$ WHERE $T$ GROUP BY $A_i$};
+
+
+
+%Clearly, an analyst would be interested in those views that reveal interesting insights. 
+%
+Manually looking for insights in each view $V_i \in \mathbb{V}$ is a labor-intensive and time-consuming process. 
+%
+%For instance, consider again our example in the previous section. 
+%
+%In that example, let $D_B$ be the Cleveland Heart Disease table (i.e., {\tt tb\_heart\_disease}) and the analyst is selecting the subset of patients with heart disease (i.e., {\tt $D_Q$ = disease} subset).
+%
+Particularly, the number of views to explore is equal to: $|\mathbb{V}|$ = $|\mathbb{A}| \times |\mathbb{M}| \times |\mathbb{F}|$, where $|\mathbb{F}|$ is the number of SQL aggregate functions, and $|\mathbb{A}|$ and $|\mathbb{M}|$ are the number of attribute and measures. %in {\tt tb\_heart\_disease}, respectively. 
+%
+%For that medium-dimensionality dataset, that value of $|\mathbb{V}|$ goes up to $180$ views, which is clearly unfeasible for manual exploration. 
+%
+Such challenge motivated multiple research efforts that focused on automatic recommendation of views based on some metrics that capture the utility of a recommended view (e.g., \cite{Key2012,Viegas2007,DBLP:journals/pvldb/SellamK16,DBLP:conf/ssdbm/SellamK16, Vartak2014,Vartak2015,Ehsan2016,kandel2012profiler,DBLP:journals/tvcg/SeoS06}). 
+%
+%\mas{next sentences need to be more specific - one sentence for each of those works! The point is to show there is a space of recommendation methods and we are selecting the deviation-based one. Can come from your old related work section or from Humaira's TKDE}
+
+Those approaches can be broadly classified as {\em user-driven} or {\em data-driven}.
+%
+User-driven solutions focus on recommending visualizations that facilitate a particular user intent or task. 
+%
+For example, VizDeck \cite{Key2012} utilizes user feedback as a basis for view recommendation, whereas Profiler \cite{kandel2012profiler} detects anomalies and recommends visualizations based on mutual information metric.
+%
+Similarly, Rank-by-Feature Framework \cite{DBLP:journals/tvcg/SeoS06} enables users to select their criterion for ranking histograms and scatter-plots. 
+%
+
+Meanwhile, {\em data-driven} focus on enabling the discovery of interesting insights from large volumes of data without requiring much prior knowledge of the explored data.
+%
+Towards that end, data-driven metrics are employed to capture the {\em interestingness} or {\em importance} of a recommended visualization. 
+%
+Recent case studies have shown that a {\em deviation-based} metric is effective in providing analysts with {\em important} visualizations that highlight some of the particular trends of the analyzed datasets \cite{Vartak2015, Vartak2014, TKDEHumaira, Ehsan2016}.
+
+%++ site humaira
+%
+%++ remove table and any reference to it
+
+%
+In particular, the deviation-based metric measures the distance between $V_i(D_Q)$ and $V_i(D_R)$. 
+%
+That is, it measures the deviation between the aggregate view $V_i$ generated from the subset data $D_Q$ vs. that generated from a reference dataset $D_R$, where $V_i(D_Q)$ is denoted as {\em target} view, whereas $V_i(D_R)$ is denoted as {\em reference} view. 
+%
+That reference dataset could be the whole database (i.e., $D_R=D_B$) or a selected subset of the database (e.g., Sec. ~\ref{introduction}). 
+%
+%
+The premise underlying the deviation-based metric is that a view $V_i$ that results in a high deviation is expected to reveal some important insights that are very particular to the subset $D_Q$ and distinguish it from the patterns in $D_R$.
+%
+In case, $D_R=D_B$, then the patterns extracted from $D_Q$ are fundamentally different from the generals ones manifested in the entire database $D_B$.  
+
+While recommending views based on their importance has been shown to reveal some interesting insight, it also suffers from the drawback of recommending similar and redundant views, which leaves the data analyst with a limited scope of the possible insights.    
+%%
+%\mas{refer back to the intro example and reiterate that issue in one sentence}
+As illustrated in the previous section, Figures~\ref{fig:intro1} and~\ref{fig:intro3} show two recommended views that basically reveal the same insight.  
+%
+To address that limitation, in this work we posit that employing {\em diversification} techniques in the process of view recommendation allows eliminating that redundancy and provides a good and concise coverage of the possible insights to be discovered.
+%%
+In the next section, we discuss in details the formulation of both importance and diversity, and their impact on the view recommendation process.
+%
+
+
+%\note{check table-text consistency and make shorter - done}
+%\note{also noticed that many symbols are often mentioned in the text without \$ especially $K$ and $S$}
+\eat{
+\begin{table}
+	\caption{Table of Symbols}
+	\label{tab:tab-symbols}
+	\begin{tabular}{ccl}
+		\toprule
+		Symbol &Description\\
+		\midrule
+		k & no. of top recommended views\\
+		S & set of top-k recommended views\\
+		%S* & optimum set of views \\
+		$ \mathbb{V}  $& set of all possible views\\
+		X & set of all candidate views\\
+		$ A $ & a dimensional attribute \\%/ member of set of attributes $ \mathbb{A} $\\
+		$ M  $& a measure attribute\\ %/ member of set of meassures $ \mathbb{M} $\\
+		$ F $ & aggregate function \\%/ member of set of agg. funcs. $ \mathbb{F} $\\
+		$ Q $ & a user query \\
+		$ D_B  $& a multi-dimensional database \\
+		$ D_Q  $& a target subset of $ D_B  $\\
+		$ D_R  $& a reference subset of $ D_B  $\\\
+		$ V_i  $& a view query\\
+		$ I$($V_i$)  & importance score of $ V_i $\\
+		$ I$($S$)  & importance score of views in S\\
+		%$ Ctx(V_i)  $& the context of $V_i$\\
+	%	$ D $  & the contextual distance measure\\ %between two views\\
+		$ f$($S$,$D$) & diversity score of views in S\\
+		$ F$($S$)  &  hybrid objective utility function value of S \\
+		$ U$($V_i$) &  the utility score of each candidate view \\
+		%$ max_I$ &  the maximum value of importance\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+}

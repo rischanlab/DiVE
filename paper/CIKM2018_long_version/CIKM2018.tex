@@ -1,0 +1,236 @@
+\documentclass[sigconf]{acmart}
+\settopmatter{printacmref=false} % Removes citation information below abstract
+\renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
+
+\pagestyle{plain} % removes running headers
+\usepackage{booktabs} % For formal tables
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{graphicx,subcaption}
+\usepackage[ruled,linesnumbered]{algorithm2e}
+
+\newcommand{\eat}[1]{}
+\newcommand{\mas}[1]{{\color{red} #1}}
+\newcommand{\note}[1]{{\color{blue} #1}}
+
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\settopmatter{printacmref=false}
+
+% Copyright
+%\setcopyright{none}
+%\setcopyright{acmcopyright}
+%\setcopyright{acmlicensed}
+%\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+
+
+% DOI
+%\acmDOI{10.475/123_4}
+%
+%% ISBN
+%\acmISBN{123-4567-24-567/08/06}
+
+%Conference
+%\acmConference[CIKM 2018]{ACMconference}{October 2018}{}
+%\acmYear{1997}
+%\copyrightyear{2018}
+%
+%
+%\acmArticle{4}
+%\acmPrice{15.00}
+
+% These commands are optional
+%\acmBooktitle{Transactions of the ACM Woodstock conference}
+%\editor{Jennifer B. Sartor}
+%\editor{Theo D'Hondt}
+%\editor{Wolfgang De Meuter}
+
+\setcopyright{none}
+\begin{document}
+\title{Diversifiying View Recommendation for Visual Data Exploration}
+%\titlenote{Produces the permission block, and
+%  copyright information}
+%\subtitle{Extended Abstract}
+%\subtitlenote{The full version of the author's guide is available as
+%  \texttt{acmart.pdf} document}
+
+
+%\author{Rischan Mafrur}
+%\affiliation{%
+%  \institution{The University of Queensland}
+%  \city{Queensland}
+%  \state{Australia}
+%}
+%\email{r.mafrur@uq.edu.au}
+%
+%\author{Mohamed A Sharaf}
+%\affiliation{%
+%	\institution{The University of Queensland}
+%	\city{Queensland}
+%	\state{Australia}
+%}
+%\email{m.sharaf@uq.edu.au}
+
+%\author{Hina A Khan}
+%\affiliation{%
+%	\institution{The University of Queensland}
+%	\city{Queensland}
+%	\state{Australia}
+%}
+%\email{h.khan3@uq.edu.au}
+
+
+
+% The default list of authors is too long for headers.
+%\renewcommand{\shortauthors}{R. Mafrur et al.}
+\newcommand{\quotes}[1]{``#1''}
+
+\begin{abstract}
+
+To support effective data exploration, there has been a growing interest in developing solutions that can automatically recommend data visualizations that reveal interesting and useful data-driven insights.
+%%
+In such solutions, a large number of possible data visualization views are generated and ranked according to some metric of importance (e.g., a deviation-based metric), then the top-k most important views are recommended. 
+%%
+However, one drawback of that approach is that it often recommends similar views, leaving the data analyst with a limited amount of gained insights.    
+%%
+To address that limitation, in this work we posit that employing diversification techniques in the process of view recommendation allows eliminating that redundancy and provides a good and concise coverage of the possible insights to be discovered.  
+%%
+To that end, we propose a hybrid objective utility function, which captures both the importance, as well as the diversity of the insights revealed by the recommended views.
+%%
+While in principle, traditional diversification methods (e.g., Greedy Construction) provide plausible solutions under our proposed utility function, they suffer from a significantly high query processing cost. 
+%
+In particular, directly applying such methods leads to a ``process-first-diversify-next" approach, in which all possible data visualization are generated first via executing a large number of aggregate queries. 
+%
+To address that challenge, we propose an integrated scheme called {\em DiVE}, which efficiently selects the top-k recommended view based on our hybrid utility function.
+%
+{\em DiVE} leverages the properties of both the importance and diversity metrics to prune a large number of query executions without compromising the quality of recommendations.
+%
+Our experimental evaluation on real datasets shows the performance gains provided by DiVE.
+
+
+\eat{
+To support effective data exploration, there has been a growing interest in developing solutions that can automatically recommend data visualizations that reveal interesting and useful data-driven insights.
+%%
+In such solutions, a large number of possible data visualization views are generated and ranked according to some metric of importance (e.g., a deviation-based metric), then the top-k most important views are recommended. 
+%%
+However, one drawback of that approach is that it often recommends similar views, leaving the data analyst with a limited amount of gained insights.    
+%%
+To address that limitation, in this work we posit that employing diversification techniques in the process of view recommendation allows eliminating that redundancy and provides a good and concise coverage of the possible insights to be discovered.  
+%%
+To that end, we propose a hybrid objective utility function, which captures both the importance, as well as the diversity of the insights revealed by the recommended views.
+%%
+
+
+However, such visualizations come at the expense of high data processing costs, where a large number of views are generated to evaluate their usefulness. Those costs are further escalated in the presence of numerical dimensional attributes, due to the potentially large number of possible binning aggregations, which lead to a drastic increase in the number of possible visualizations. 
+
+To address that challenge, in this paper we propose the MuVE scheme for Multi-Objective View Recommendation for Visual Data Exploration. MuVE introduces a hybrid multi-objective utility function, which captures the impact of binning on the utility of visualizations. Consequently, novel algorithms are proposed for the efficient recommendation of data visualizations that are based on numerical dimensions. The main idea underlying MuVE is to incrementally and progressively assess the different benefits provided by a visualization, which allows an early pruning of a large number of unnecessary op- erations. Our extensive experimental results show the significant gains provided by our proposed scheme.
+
+Data visualization is gaining growing interest as an indis- pensable tool for data exploration and analysis in a widely diverse set of discovery-oriented applications [9], [23]. In such applications, data analysts explore large volumes of data look- ing for interesting visualization that reveal new and valuable insights. Such process is typically ad-hoc and labor-intensive, especially for high-dimensional databases. Motivated by the need for efficient data analysis and exploration, several solu- tions for recommending visualizations have recently emerged to guide analysts throughout that rather time-consuming pro- cess (e.g., [22], [21], [14], [13]).
+
+
+
+Data visualization, which transforms data into im- ages to make nearly anyone easily understand the data, is invaluable for explaining the significance of data to people who are more visually oriented. The central task of automatic data visualization is, for a given dataset, to visualize its compelling stories by transforming the data (for example, selecting attributes, grouping and binning values) and deciding the right type of visualization (for example, bar charts or line charts).
+
+Technically speaking, “interesting” charts can be defined from three angles: (1) Deviation-based: a chart that is dramat- ically different from the other charts (e.g., SeeDB [22]);
+}
+
+\iffalse
+\mas{
+Today, visualization recommendation tools have become essential part for the easy-to-use visual data exploration systems of large high dimensional datasets. 
+%%
+Most of the existing research on visualization recommendation focuses on ranking the visualizations on the basis of particular criteria of importance. 
+%%
+The user is then presented with top-k most important views. 
+%%
+The limitation of using only importance as ranking criteria is that it often leads to generate redundant views which reveal similar information about the dataset.  
+%%
+However, a diverse set of recommended views is likely to be more informative than a monotonous set of views due to it able to present representative results. 
+%%
+Meanwhile, the benefits of visualization recommendation are achieved at the expense of high costs where a large number of all possible views are generated to gain top-k views. 
+%%
+To address that challenge, in this paper, we propose an integrated scheme called \textit{DiVE}, that evaluates top-k views based on both importance and diversity. 
+%%
+Towards that end, we propose a combined objective function based on diversity and importance to evaluate the effectiveness of top-k views. 
+%%
+Further, \textit{DiVE} leverages the properties of the combined objective function to significantly reduce the processing cost of computing top-k views by pruning of a large number of query executions. 
+%%
+Instead of following the current technique in diversification which is \textit{process-first-diversify-next}, \textit{DiVE} uses the opposite approach that able to prune more than 40 percent of the number of queries. 
+%%
+We have evaluated the effectiveness and efficiency of our proposed scheme on real datasets. Our experimental results show substantial benefits of our scheme over the state of the art techniques.
+}
+\fi
+% \footnote{This is an abstract footnote}
+\end{abstract}
+
+%
+% The code below should be generated by the tool at
+% http://dl.acm.org/ccs.cfm
+% Please copy and paste the code instead of the example below.
+%
+\begin{CCSXML}
+<ccs2012>
+ <concept>
+  <concept_id>10010520.10010553.10010562</concept_id>
+  <concept_desc>Computer systems organization~Embedded systems</concept_desc>
+  <concept_significance>500</concept_significance>
+ </concept>
+ <concept>
+  <concept_id>10010520.10010575.10010755</concept_id>
+  <concept_desc>Computer systems organization~Redundancy</concept_desc>
+  <concept_significance>300</concept_significance>
+ </concept>
+ <concept>
+  <concept_id>10010520.10010553.10010554</concept_id>
+  <concept_desc>Computer systems organization~Robotics</concept_desc>
+  <concept_significance>100</concept_significance>
+ </concept>
+ <concept>
+  <concept_id>10003033.10003083.10003095</concept_id>
+  <concept_desc>Networks~Network reliability</concept_desc>
+  <concept_significance>100</concept_significance>
+ </concept>
+</ccs2012>
+\end{CCSXML}
+
+%\ccsdesc[500]{Computer systems organization~Embedded systems}
+%\ccsdesc[300]{Computer systems organization~Redundancy}
+%\ccsdesc{Computer systems organization~Robotics}
+%\ccsdesc[100]{Networks~Network reliability}
+
+%\ccsdesc{H.2.4 [Database Management]}
+%
+%\keywords{Algorithms, Design, Experimentation, Performance.}
+%
+
+\maketitle
+
+\input{1_introduction}
+%\vspace{-7pt}
+% Preliminaries and Related Work
+\input{2_preliminaries_related_work}
+%\vspace{-7pt}
+\input{3_1_diversifying_recommended_visualizations}
+\input{3_3_problem_definition}
+%\vspace{-7pt}
+\input{4_1_proposed_method_greedy}
+\input{4_2_proposed_method_swap}
+\input{4_6_proposed_method_adaptive}
+%\vspace{-7pt}
+\input{5_6_experimental_testbed_and_effectiveness}
+\input{6_2_experimental_evaluation_efficiency}
+%\vspace{-7pt}
+\input{7_conclusion}
+%\vspace{-9pt}
+
+%\input{CIKM-body-conf}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{cikm2018}
+
+\end{document}

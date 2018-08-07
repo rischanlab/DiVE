@@ -1,0 +1,102 @@
+% ============================================== %
+% EXPERIMENTAL EVALUATION %
+% ============================================== %
+
+\section{Evaluation Testbed}\label{sec:experimental_testbed}
+
+In this section, we present the different settings 
+
+an evaluation of our proposed {\em DiVE} scheme both in terms of effectiveness and efficiency when returning diversified interesting visualizations. 
+%
+Table \ref{tab:tab-parameter} summarizes the different parameters used in our experimental evaluation while the default values are presented in bold.  All experiments were run on a single machine with 16 GB RAM and a 64 bit, Intel Core i7-7700 processor. We have conducted our experiments over following real datasets:
+
+
+\begin{table}
+	\caption{Parameters testbed in the experiments}
+	\label{tab:tab-parameter}
+	\begin{tabular}{ccl}
+		\toprule
+		Parameter &Range (\textbf{default})\\
+		\midrule\
+		datasets & \textbf{Heart disease}, Flights\\
+		sample queries & \textbf{10} \\
+		diversity weight ratio & \textbf{3($ A $) : 2($ M $) : 1($ F $)} \\
+		tradeoff weight $ \lambda $ & 0.0, 0.2, 0.4, \textbf{0.5}, 0.6, 0.8, 1.0 \\
+		result set (size of \textit{k}) & \textbf{5}, 15, 25, 35\\
+		prediction interval \% & 80 , 85, 90, 95, \textbf{97}, 98\\
+	%	aggregate functions & Max Min Avg Sum \\
+		%		algorithms & Linear-Importance, Greedy-Diversity, DiVE-Greedy, DiVE-Greedy-Static\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{itemize}
+	\item Heart Disease Dataset \footnote{http://archive.ics.uci.edu/ml/datasets/heart+Disease}: This dataset is comprised of $9$ dimensional attributes and $5$ measure attributes. The number of possible views are $180$ with four aggregate functions.% and  has 14 attributes in total which are 9 attributes $ \mathbb{A} $ and 5 measure attributes $ \mathbb{M} $, $ \mathbb{A}  $= sex, cp, fbs, restecg, exang, slope, ca, thal, num; $ \mathbb{M} $ = age, trestbps, chol, thalach, oldpeak. This dataset has small number of rows (299 rows).
+	\item Airline (Flights) Dataset \footnote{http://stat-computing.org/dataexpo/2009/the-data.html}: This dataset is comprised of $7$ dimensional attributes and $4$ measure attributes. The number of possible views are $112$.%The detail as follows: $ \mathbb{A}  $= year, month, week, day, carrier, origin, destination; $ \mathbb{M}  $= arrivaldelay, departurdelay, weatherdelay, distance. This dataset has 855,632 number of rows. 
+\end{itemize}
+
+In particular, we evaluate the performance of following schemes:
+\begin{itemize}
+	\item Linear-Importance: Selects top-k views on the basis of only the importance score.
+	\item Greedy-Diversity: Selects top-k diverse views.
+	\item DiVE-Greedy: Selects top-k views on the basis of hybrid objective function using greedy algorithm.
+	\item DiVE-iSwap: Selects top-k views on the basis of hybrid objective function using swap algorithm initialized by Linear-importance method. 
+	\item DiVE-dSwap: Selects top-k views on the basis of hybrid objective function using swap algorithm initialized by Greedy-Diversity method.
+	\item Static-pruning: DiVE-Greedy and DiVE-dSwap methods using static pruning technique to reduce the number of view queries as presented in section \ref{dive-greedy-static}  and \ref{subsec:dive-dswap}
+	\item Adaptive-pruning: DiVE-Greedy and DiVE-dSwap methods using adaptive pruning method as discussed in section \ref{subsec:adaptive-pruning}.	
+\end{itemize}
+For each experiment a query workload of ten random queries is submitted to select ten different subsets of data $D_Q$. The performance measures are averaged over views recommended for each of those ten subsets. In particular, the performance of each scheme listed above is measured based on the following metrics:
+\begin{itemize}
+	\item {\bf  Interestingness of the views:} measured as the value of hybrid objective function 
+    $F\left(S\right)$ for selected set of views $S$, as defined in equation \ref{objectif_function}.
+	\item {\bf Total Cost:} measured as the sum of the cost to execute view queries and the cost to diversify the views that is : $C_T= C_Q + C_D$
+\end{itemize}
+
+\begin{figure*}[t]
+	\centering
+	\subcaptionbox{Heart disease dataset}[.45\linewidth][c]{%
+		\includegraphics[width=.45\linewidth]{figures/results/tradeoff_heart_2}}
+	\subcaptionbox{Flights dataset}[.45\linewidth][c]{%
+		\includegraphics[width=.45\linewidth]{figures/results/tradeoff_flights}}
+	\caption{Impact of $\lambda$ on $F\left(S\right)$, k = 5}
+	\label{fig:tradeoff_3_datasets}	
+\end{figure*}
+
+\begin{figure*}[t]
+	\centering
+	\subcaptionbox{Heart disease dataset}[.45\linewidth][c]{%
+		\includegraphics[width=.45\linewidth]{figures/results/objf_heart_2}}
+	\subcaptionbox{Flights datasets}[.45\linewidth][c]{%
+		\includegraphics[width=.45\linewidth]{figures/results/objf_flights}}
+	\caption{Impact of k on $F\left(S\right)$, $\lambda = 0.5$}
+	\label{fig:objf_3_datasets}
+\end{figure*}
+
+
+% The Impact of \lambda to the overall objective function value %
+
+
+\section{Experimental Evaluation}\label{sec:experimental_evaluation}
+In this section, we evaluate the sensitivity of \textit{DiVE} scheme to the different parameters as given in Table \ref{tab:tab-parameter}.\\
+
+{\noindent{\bf The impact of $\lambda$ on the objective function}}
+The value of $\lambda$ balances the trade off between importance and diversity score. Figure \ref{fig:tradeoff_3_datasets} shows how the performance of each scheme in terms of $F\left(S\right)$ is effected as the value of  $\lambda$ varies from $0$ to $1$. It is clearly seen in Figure \ref{fig:tradeoff_3_datasets}, that for the lower values of $\lambda$ the highest objective function value is achieved by Linear-Importance method. To the contrary, the Greedy-Diversity method achieves highest values of $F\left(S\right)$ as the $\lambda$ approaches $1$. Hence, there is a crossover between Linear-Importance and Greedy-Diversity. However, our proposed schemes based on the hybrid objective function have stable performance for all values of $\lambda$ and are able to achieve $F\left(S\right)$ values higher than those achieved by Linear-Importance and Greedy-Diversity. \\
+
+
+% The Impact of k to the overall objective function value %
+
+{\noindent{\bf The impact of k on the objective function}} 
+Figure \ref{fig:objf_3_datasets} shows the $F\left(S\right)$ values for various schemes as the number of recommended views $k$ varies from $5$ to $35$. Overall the $F\left(S\right)$ value decreases with increasing value of $k$ for all the schemes. This is because both average importance score and diversity of a set $S$ decreases as new views are added to $S$. The views added earlier to $S$ have higher importance score then the views added later. Similarly, the diversity function exhibits a diminishing
+marginal gain trend as the size of set $S$ increases. The important observation here is the fact that our {\em DiVE} schemes always have higher overall objective function values as compared to the two extreme baselines approaches for all values of $k$. Among the {\em DiVE} schemes, DiVE-iSwap and DiVE-dSwap perform better than the Greedy versions. This is because, swap algorithm performs number of additional iterations to improve the value of the objective function.
+
+
+
+%\eat{
+%	\textbf{\textit{Experimental Setup}}. This experiment running on Windows 10 64 bit, Intel Core i7-7700 CPU @ 3.60 GHz, RAM 16 GB. The experiment is developed using Python and run on Python version 3.6.3 with PostgreSQL as the database engine. Two real datasets are used, as follows: 
+%}
+%
+%\eat{
+%	\subsection{Effectiveness Evaluation}
+%	%  Prolog of the quality of the results evaluation%
+%	In order to test the performance of our proposed approach, we run experiments using two real datasets: flights dataset and heart disease dataset. For each dataset, we execute ten random queries. Afterwards, the average of all results is calculated as the final result. We examine the performance of our proposed schemes in term of the quality of the result (effectiveness) and the efficiency. All parameters used in this experiments are summarized in Table \ref{tab:tab-parameter} and the detail results of the experiments is elaborated next. 
+%}
