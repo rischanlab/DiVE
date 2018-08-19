@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.2.23)  17 AUG 2018 13:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.2.23)  19 AUG 2018 20:13
 entering extended mode
-**./Full_report_August_2018.tex
-(Full_report_August_2018.tex
+**./Rectifying_Bound.tex
+(Rectifying_Bound.tex
 LaTeX2e <2017-04-15>
 Babel <3.15> and hyphenation patterns for 75 language(s) loaded.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
@@ -262,8 +262,8 @@ Package: relsize 2003/07/04 ver 3.1
 \algocf@algoframe=\box35
 \algocf@algobox=\box36
 )
-(Full_report_August_2018.aux)
-\openout1 = `Full_report_August_2018.aux'.
+(Rectifying_Bound.aux)
+\openout1 = `Rectifying_Bound.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
 LaTeX Font Info:    ... okay on input line 18.
@@ -375,194 +375,66 @@ Package caption Info: End \AtBeginDocument code.
 \AtBeginShipoutBox=\box38
 Package atbegshi Info: Shipout page discarded.
  [1{C:/Users/uqrmafru/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-<figures/DiVE-Greedy.pdf, id=7, pagebox=cropbox, 963.6pt x 542.025pt>
-File: figures/DiVE-Greedy.pdf Graphic file (type pdf)
-<use figures/DiVE-Greedy.pdf>
-Package pdftex.def Info: figures/DiVE-Greedy.pdf  used on input line 49. on inp
-ut line 49.
-Package pdftex.def Info: Requested size: 433.62pt x 243.90898pt on input line 4
-9.
-<figures/no_pruning_vs_static_extend.pdf, id=8, pagebox=cropbox, 416.55624pt x 
-265.99374pt>
-File: figures/no_pruning_vs_static_extend.pdf Graphic file (type pdf)
-<use figures/no_pruning_vs_static_extend.pdf>
-Package pdftex.def Info: figures/no_pruning_vs_static_extend.pdf  used on input
- line 67. on input line 67.
-Package pdftex.def Info: Requested size: 289.07999pt x 184.60332pt on input lin
-e 67.
- [1 <./figures/DiVE-Greedy.pdf>]
-<figures/pruning_performance_greedy_dswap_adaptive.pdf, id=45, pagebox=cropbox,
- 416.55624pt x 265.99374pt>
-File: figures/pruning_performance_greedy_dswap_adaptive.pdf Graphic file (type 
-pdf)
-<use figures/pruning_performance_greedy_dswap_adaptive.pdf>
-Package pdftex.def Info: figures/pruning_performance_greedy_dswap_adaptive.pdf 
- used on input line 81. on input line 81.
-Package pdftex.def Info: Requested size: 289.07999pt x 184.60332pt on input lin
-e 81.
- [2 <./figures/no_pruning_vs_static_extend.pdf> <./figures/pruning_performance_
-greedy_dswap_adaptive.pdf
 
-pdfTeX warning: pdflatex.exe (file ./figures/pruning_performance_greedy_dswap_a
-daptive.pdf): PDF inclusion: multiple pdfs with page group included in a single
- page
->]
-<figures/AVG_STUDENT.pdf, id=95, pagebox=cropbox, 844.95674pt x 597.432pt>
-File: figures/AVG_STUDENT.pdf Graphic file (type pdf)
-<use figures/AVG_STUDENT.pdf>
-Package pdftex.def Info: figures/AVG_STUDENT.pdf  used on input line 110. on in
-put line 110.
-Package pdftex.def Info: Requested size: 231.26378pt x 163.51488pt on input lin
-e 110.
-<figures/MAX_STUDENT.pdf, id=96, pagebox=cropbox, 844.95674pt x 597.432pt>
-File: figures/MAX_STUDENT.pdf Graphic file (type pdf)
-<use figures/MAX_STUDENT.pdf>
-Package pdftex.def Info: figures/MAX_STUDENT.pdf  used on input line 111. on in
-put line 111.
-Package pdftex.def Info: Requested size: 231.26378pt x 163.51488pt on input lin
-e 111.
- [3 <./figures/AVG_STUDENT.pdf> <./figures/MAX_STUDENT.pdf
+LaTeX Warning: Float too large for page by 79.22548pt on input line 303.
 
-pdfTeX warning: pdflatex.exe (file ./figures/MAX_STUDENT.pdf): PDF inclusion: m
-ultiple pdfs with page group included in a single page
->]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 122.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 317.
 
- ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 122.
-<figures/MaxSum_MaxMin_Greedy.pdf, id=125, pagebox=cropbox, 416.55624pt x 265.9
-9374pt>
-File: figures/MaxSum_MaxMin_Greedy.pdf Graphic file (type pdf)
-<use figures/MaxSum_MaxMin_Greedy.pdf>
-Package pdftex.def Info: figures/MaxSum_MaxMin_Greedy.pdf  used on input line 1
-72. on input line 172.
-Package pdftex.def Info: Requested size: 216.81pt x 138.44742pt on input line 1
-72.
-<figures/MaxSum_MaxMin_Swap.pdf, id=126, pagebox=cropbox, 416.55624pt x 265.993
-74pt>
-File: figures/MaxSum_MaxMin_Swap.pdf Graphic file (type pdf)
-<use figures/MaxSum_MaxMin_Swap.pdf>
-Package pdftex.def Info: figures/MaxSum_MaxMin_Swap.pdf  used on input line 173
-. on input line 173.
-Package pdftex.def Info: Requested size: 216.81pt x 138.44742pt on input line 1
-73.
- [4]
-<figures/1_tradeoff_June_objf_disease_maxSUM.pdf, id=132, pagebox=cropbox, 433.
-62pt x 289.08pt>
-File: figures/1_tradeoff_June_objf_disease_maxSUM.pdf Graphic file (type pdf)
-<use figures/1_tradeoff_June_objf_disease_maxSUM.pdf>
-Package pdftex.def Info: figures/1_tradeoff_June_objf_disease_maxSUM.pdf  used 
-on input line 208. on input line 208.
-Package pdftex.def Info: Requested size: 216.81pt x 144.53964pt on input line 2
-08.
-<figures/1_tradeoff_June_objf_disease_MaxMIN.pdf, id=133, pagebox=cropbox, 433.
-62pt x 289.08pt>
-File: figures/1_tradeoff_June_objf_disease_MaxMIN.pdf Graphic file (type pdf)
-<use figures/1_tradeoff_June_objf_disease_MaxMIN.pdf>
-Package pdftex.def Info: figures/1_tradeoff_June_objf_disease_MaxMIN.pdf  used 
-on input line 209. on input line 209.
-Package pdftex.def Info: Requested size: 216.81pt x 144.53964pt on input line 2
-09.
-<figures/Impact_k_performance.pdf, id=134, pagebox=cropbox, 844.95674pt x 597.4
-32pt>
-File: figures/Impact_k_performance.pdf Graphic file (type pdf)
-<use figures/Impact_k_performance.pdf>
-Package pdftex.def Info: figures/Impact_k_performance.pdf  used on input line 2
-25. on input line 225.
-Package pdftex.def Info: Requested size: 289.07999pt x 204.39133pt on input lin
-e 225.
- [5 <./figures/MaxSum_MaxMin_Greedy.pdf> <./figures/MaxSum_MaxMin_Swap.pdf
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 317.
+<figures/flight_costs_rectifying.pdf, id=7, pagebox=cropbox, 844.95674pt x 597.
+432pt>
+File: figures/flight_costs_rectifying.pdf Graphic file (type pdf)
+<use figures/flight_costs_rectifying.pdf>
+Package pdftex.def Info: figures/flight_costs_rectifying.pdf  used on input lin
+e 379. on input line 379.
+Package pdftex.def Info: Requested size: 505.89pt x 357.69621pt on input line 3
+79.
 
-pdfTeX warning: pdflatex.exe (file ./figures/MaxSum_MaxMin_Swap.pdf): PDF inclu
-sion: multiple pdfs with page group included in a single page
->] [6 <./figures/1_tradeoff_June_objf_disease_maxSUM.pdf> <./figures/1_tradeoff
-_June_objf_disease_MaxMIN.pdf
-
-pdfTeX warning: pdflatex.exe (file ./figures/1_tradeoff_June_objf_disease_MaxMI
-N.pdf): PDF inclusion: multiple pdfs with page group included in a single page
-> <./figures/Impact_k_performance.pdf
-
-pdfTeX warning: pdflatex.exe (file ./figures/Impact_k_performance.pdf): PDF inc
-lusion: multiple pdfs with page group included in a single page
->]
-<figures/flight_costs_all.pdf, id=244, pagebox=cropbox, 844.95674pt x 597.432pt
->
-File: figures/flight_costs_all.pdf Graphic file (type pdf)
-<use figures/flight_costs_all.pdf>
-Package pdftex.def Info: figures/flight_costs_all.pdf  used on input line 259. 
-on input line 259.
-Package pdftex.def Info: Requested size: 505.89pt x 357.69621pt on input line 2
-59.
-
-Overfull \hbox (36.13498pt too wide) in paragraph at lines 259--261
+Overfull \hbox (36.13498pt too wide) in paragraph at lines 379--381
  [] 
  []
 
-
-LaTeX Warning: Float too large for page by 14.72546pt on input line 380.
-
-
-LaTeX Warning: Float too large for page by 67.5699pt on input line 496.
-
-[7 <./figures/flight_costs_all.pdf>] [8] [9]
-<figures/impact_of_k_to_diversity_cost.pdf, id=269, pagebox=cropbox, 393.47pt x
- 265.99374pt>
-File: figures/impact_of_k_to_diversity_cost.pdf Graphic file (type pdf)
-<use figures/impact_of_k_to_diversity_cost.pdf>
-Package pdftex.def Info: figures/impact_of_k_to_diversity_cost.pdf  used on inp
-ut line 520. on input line 520.
-Package pdftex.def Info: Requested size: 289.07999pt x 195.4239pt on input line
- 520.
-<figures/rectifying_bound_2.pdf, id=270, pagebox=cropbox, 963.6pt x 542.025pt>
-File: figures/rectifying_bound_2.pdf Graphic file (type pdf)
-<use figures/rectifying_bound_2.pdf>
-Package pdftex.def Info: figures/rectifying_bound_2.pdf  used on input line 532
-. on input line 532.
-Package pdftex.def Info: Requested size: 505.89pt x 284.55911pt on input line 5
-32.
-
-Overfull \hbox (36.13498pt too wide) in paragraph at lines 532--534
- [] 
- []
-
-<figures/pruning_performance_greedy_rectifying.pdf, id=271, pagebox=cropbox, 41
-6.55624pt x 265.99374pt>
+<figures/pruning_performance_greedy_rectifying.pdf, id=8, pagebox=cropbox, 416.
+55624pt x 265.99374pt>
 File: figures/pruning_performance_greedy_rectifying.pdf Graphic file (type pdf)
 
 <use figures/pruning_performance_greedy_rectifying.pdf>
 Package pdftex.def Info: figures/pruning_performance_greedy_rectifying.pdf  use
-d on input line 546. on input line 546.
-Package pdftex.def Info: Requested size: 216.81pt x 138.44742pt on input line 5
-46.
-<figures/pruning_performance_dswap_rectifying.pdf, id=272, pagebox=cropbox, 416
-.55624pt x 265.99374pt>
+d on input line 389. on input line 389.
+Package pdftex.def Info: Requested size: 216.81pt x 138.44742pt on input line 3
+89.
+<figures/pruning_performance_dswap_rectifying.pdf, id=9, pagebox=cropbox, 416.5
+5624pt x 265.99374pt>
 File: figures/pruning_performance_dswap_rectifying.pdf Graphic file (type pdf)
 <use figures/pruning_performance_dswap_rectifying.pdf>
 Package pdftex.def Info: figures/pruning_performance_dswap_rectifying.pdf  used
- on input line 547. on input line 547.
-Package pdftex.def Info: Requested size: 216.81pt x 138.44742pt on input line 5
-47.
-<figures/rectifiying_error_f_s_greedy.pdf, id=273, pagebox=cropbox, 404.51125pt
- x 265.99374pt>
+ on input line 390. on input line 390.
+Package pdftex.def Info: Requested size: 216.81pt x 138.44742pt on input line 3
+90.
+<figures/rectifiying_error_f_s_greedy.pdf, id=10, pagebox=cropbox, 404.51125pt 
+x 265.99374pt>
 File: figures/rectifiying_error_f_s_greedy.pdf Graphic file (type pdf)
 <use figures/rectifiying_error_f_s_greedy.pdf>
 Package pdftex.def Info: figures/rectifiying_error_f_s_greedy.pdf  used on inpu
-t line 556. on input line 556.
-Package pdftex.def Info: Requested size: 216.81pt x 142.56703pt on input line 5
-56.
-<figures/rectifiying_error_f_s_dswap.pdf, id=274, pagebox=cropbox, 404.51125pt 
-x 265.99374pt>
+t line 398. on input line 398.
+Package pdftex.def Info: Requested size: 216.81pt x 142.56703pt on input line 3
+98.
+<figures/rectifiying_error_f_s_dswap.pdf, id=11, pagebox=cropbox, 404.51125pt x
+ 265.99374pt>
 File: figures/rectifiying_error_f_s_dswap.pdf Graphic file (type pdf)
 <use figures/rectifiying_error_f_s_dswap.pdf>
 Package pdftex.def Info: figures/rectifiying_error_f_s_dswap.pdf  used on input
- line 557. on input line 557.
-Package pdftex.def Info: Requested size: 216.81pt x 142.56703pt on input line 5
-57.
-[10 <./figures/impact_of_k_to_diversity_cost.pdf>] [11 <./figures/rectifying_bo
-und_2.pdf> <./figures/pruning_performance_greedy_rectifying.pdf
+ line 399. on input line 399.
+Package pdftex.def Info: Requested size: 216.81pt x 142.56703pt on input line 3
+99.
+
+AED: lastpage setting LastPage
+[1] [2] [3] [4 <./figures/flight_costs_rectifying.pdf> <./figures/pruning_perfo
+rmance_greedy_rectifying.pdf
 
 pdfTeX warning: pdflatex.exe (file ./figures/pruning_performance_greedy_rectify
 ing.pdf): PDF inclusion: multiple pdfs with page group included in a single pag
@@ -572,53 +444,35 @@ e
 pdfTeX warning: pdflatex.exe (file ./figures/pruning_performance_dswap_rectifyi
 ng.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 
->]
-<figures/rectifying_cost.pdf, id=365, pagebox=cropbox, 844.95674pt x 597.432pt>
-
-File: figures/rectifying_cost.pdf Graphic file (type pdf)
-<use figures/rectifying_cost.pdf>
-Package pdftex.def Info: figures/rectifying_cost.pdf  used on input line 573. o
-n input line 573.
-Package pdftex.def Info: Requested size: 289.07999pt x 204.39133pt on input lin
-e 573.
- [12 <./figures/rectifiying_error_f_s_greedy.pdf> <./figures/rectifiying_error_
-f_s_dswap.pdf
+>] [5 <./figures/rectifiying_error_f_s_greedy.pdf> <./figures/rectifiying_error
+_f_s_dswap.pdf
 
 pdfTeX warning: pdflatex.exe (file ./figures/rectifiying_error_f_s_dswap.pdf): 
 PDF inclusion: multiple pdfs with page group included in a single page
-> <./figures/rectifying_cost.pdf
-
-pdfTeX warning: pdflatex.exe (file ./figures/rectifying_cost.pdf): PDF inclusio
-n: multiple pdfs with page group included in a single page
->] 
-AED: lastpage setting LastPage
-[13] (Full_report_August_2018.aux) ) 
+>] (Rectifying_Bound.aux) ) 
 Here is how much of TeX's memory you used:
- 5402 strings out of 493312
- 85446 string characters out of 3138890
- 183238 words of memory out of 3000000
- 8854 multiletter control sequences out of 15000+200000
- 10894 words of font info for 39 fonts, out of 3000000 for 9000
+ 5306 strings out of 493312
+ 82209 string characters out of 3138890
+ 184139 words of memory out of 3000000
+ 8779 multiletter control sequences out of 15000+200000
+ 7475 words of font info for 27 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,19n,45p,1246b,547s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
-fonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmbx7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.p
-fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/P
-rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program F
-iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fo
-nts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
-public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
-fonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
-msy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb
-><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Fil
-es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on Full_report_August_2018.pdf (14 pages, 2703555 bytes).
+ 42i,20n,45p,647b,596s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
+onts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx7.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts
+/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
+fonts/cm/cmti10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmti12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.
+pfb>
+Output written on Rectifying_Bound.pdf (6 pages, 597104 bytes).
 PDF statistics:
- 493 PDF objects out of 1000 (max. 8388607)
+ 199 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 91 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

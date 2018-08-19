@@ -6,6 +6,7 @@
 \usepackage{booktabs}
 \usepackage{enumitem}
 \usepackage{atbegshi}% http://ctan.org/pkg/atbegshi
+\usepackage[ruled,linesnumbered]{algorithm2e}
 \AtBeginDocument{\AtBeginShipoutNext{\AtBeginShipoutDiscard}}
 
 %\ExamClass{Sample Class}
@@ -20,7 +21,7 @@
 	\vspace*{\stretch{1.0}}
 	\begin{center}
 		\Large\textbf{Extended Experiment Report}\\
-		\large\textit{August 2018}
+		\large\textit{14 August 2018}
 	\end{center}
 	\vspace*{\stretch{2.0}}
 \end{titlepage}
@@ -46,7 +47,7 @@ To avoid such expensive processing, pruning scheme is proposed.
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=6.0in]{figures/DiVE-Greedy}
-		\vspace{-12pt}
+		\vspace{-9pt}
 		\caption{DiVE-Greedy pruning technique}
 		\label{fig:DiVE-Greedy}
 		\vspace{-20pt}
@@ -72,9 +73,9 @@ Our pruning technique works by leveraging the diversity score and importance sco
 \end{figure}
 
 
-For instance, Figure \ref{fig:DiVE-Greedy} shows how DiVE-Greedy pruning works. After the set $S$ are initialized by two most distant views, $X$ is sorted based on the distance score of candidate views in $X$ to $S$ (i.e., $ setDist(X_i, S) $). The highest score will be on the top (i.e., the highest score of $setDist$ in this example is 0.50). Notice that up to this point there is no query execution, only diversity computation cost (i.e., $ setDist(X_i, S) $) is needed. However, to calculate the $F(S)$, the importance score of view need to be known by executing the query view. To get the importance score of the view, the query view is executed one by one starts from the top. While first view $X_1$ is executed and its importance score has been known (i.e., the importance score of $X_1$ is 0.40), the hybrid objective function can be calculated. The $F(S)$ is the objective function of set $S $ while $X_1$ is added to the set $S$ (i.e., $ F(S \cup X_1) $). This objective function will be the current objective function $ F(S) $ (i.e., 0.39). Then, $ maxF(S \cup X_i) $ of all remaining views in $X$ are calculated using actual diversity score and upper bound of importance score. 
+For instance, Figure \ref{fig:DiVE-Greedy} shows how DiVE-Greedy pruning works. After the set $S$ are initialized with the two most distant views, $X$ is sorted based on the distance score of candidate views in $X$ to $S$ (i.e., $ setDist(X_i, S) $). The highest score will be on the top (i.e., the highest score of $setDist$ in this example is 0.50). Notice that up to this point there is no query execution, only diversity computation cost (i.e., $ setDist(X_i, S) $) is needed. In order to calculate the $F(S)$, the importance score of view need to be known by executing the query view. To get the importance score of the view, the query view is executed one by one starts from the top. While first view $X_1$ is executed and its importance score has been known (i.e., the importance score of $X_1$ is 0.40), the hybrid objective function can be calculated. The $F(S)$ is the objective function of set $S $ while $X_1$ is added to the set $S$ (i.e., $ F(S \cup X_1) $). This objective function will be the current objective function $ F(S) $ (i.e., 0.39). Then, $ maxF(S \cup X_i) $ of all remaining views in $X$ are calculated using actual diversity score and upper bound of importance score. 
 
-If $ maxF(S \cup X_i) < F(S) $ then it is guaranteed that the actual objective function to be less than the current objective function $ F(S) $ and these views can be pruned (i.e., all views below $X_{100}$ will be pruned). It cannot be denied because the real importance score is always below the upper bound. Meanwhile, if $ maxF(S \cup X_i) > F(S) $ such $X_2 - X_{55}$ (i.e., read circle), these views need to be executed start from the top. If on the next query view execution, there is a view that can improve $ F(S) $ compared to the current $  F(S) $ the currect $F(S)$ will be updated. This technique is able to prune many low-quality views as shown in Figure \ref{fig:static-pruning}.
+If $ maxF(S \cup X_i) < F(S) $ then it is guaranteed that the actual objective function to be less than the current objective function $ F(S) $ and these views can be pruned (i.e., all views below $X_{100}$ will be pruned). It cannot be denied because the real importance score is always below the upper bound. Meanwhile, if $ maxF(S \cup X_i) > F(S) $ such $X_2 - X_{55}$ (i.e., read circle), these views need to be executed start from the top. If on the next query view execution, there is a view that can improve $ F(S) $ compared to the current $  F(S) $, then the currect $F(S)$ will be updated. This technique is able to prune many low-quality views as shown in Figure \ref{fig:static-pruning}.
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=4.0in]{figures/pruning_performance_greedy_dswap_adaptive}
@@ -85,9 +86,9 @@ If $ maxF(S \cup X_i) < F(S) $ then it is guaranteed that the actual objective f
 	\end{center}
 \end{figure}
 \subsection{DiVE-dSwap}
-As shown in the Figure \ref{fig:static-pruning}, DiVE-Greedy has a good pruning performance even it uses static bound. It will have better performance while adaptive bound is used as shown in Figure \ref{fig:adaptive-pruning-performance}. Although DiVE-Greedy is able to prune queries, Greedy starts with small number of views (i.e., two most distant views) in the initialization set $S$ that these views cannnot be replaced. Hence, this technique may reducing the quality of recommended views and pruning performance. For instance, there is no guarantee that two most distant views which selected by Greedy as the initialization have high importance score and there is no way to replace those two views. Moreover, due to our context-driven only consist of three components (i.e., Attribute, Measure, and Aggregate Function), in the first Greedy iteration many views have same $ setDist(X_i, S) $ score because only two views are in the set $S$. This issue may decrease the chance of pruning.
+As shown in the Figure \ref{fig:static-pruning}, DiVE-Greedy has a good pruning performance even it uses static bound. It will have better performance while adaptive bound is used as shown in Figure \ref{fig:adaptive-pruning-performance}. Although DiVE-Greedy is able to prune many queries, Greedy starts with small number of views (i.e., two most distant views) in the initialization set $S$ that these views cannnot be replaced. Hence, this technique may reducing the quality of recommended views in terms of effectiveness and efficiency. For instance, there is no guarantee that two most distant views which selected by Greedy as the initialization have high importance score and there is no way to replace those two views. Moreover, due to our context-driven only consist of three components (i.e., Attribute, Measure, and Aggregate Function), in the first Greedy iteration many views have same score of $ setDist(X_i, S) $ because only two views are in the set $S$. This issue may decrease the chance of pruning.
 
-In order to overcome these issues, DiVE-dSwap is proposed as well. DiVE-dSwap technique has a replacing mechanism that can replace low quality views in the current set $S$ with the better one. In addition, DiVE-dSwap has bigger number of views in the initialization of set $S$ ($|S|$ = $k$). Meanwhile, higher number of views in the initialization of set $S$ can decrease the chance of views in $X$ have same $ setDist $ score.  
+In order to overcome these issues, DiVE-dSwap is proposed as well. DiVE-dSwap technique has a replacing mechanism that can replace low quality views in the current set $S$ with the better one. In addition, DiVE-dSwap has bigger number of views in the initialization set $S$ ($|S|$ = $k$). Meanwhile, higher number of views in the set $S$ can decrease the chance of views in $X$ have same $ setDist $ score.  
 
 
 In this experiment, we used Flights dataset with 5 queries, Figure \ref{fig:static-pruning} shows the pruning performance of DiVE-Greedy and DiVE-dSwap while static bound is used and Figure \ref{fig:adaptive-pruning-performance} while adaptive bound is used. 
@@ -96,7 +97,7 @@ In this experiment, we used Flights dataset with 5 queries, Figure \ref{fig:stat
 
 \section{New Dataset}
 
-The student performance dataset is used in this experiment as the motivation example dataset. This dataset can be downloaded from Kaggle \footnote{https://www.kaggle.com/uciml/student-alcohol-consumption} and UCI ML website \footnote{https://archive.ics.uci.edu/ml/datasets/student+performance}. This dataset has 28 attributes, 5 measures, and four aggregate functions are used. The data were obtained in a survey of students math and Portuguese language courses in secondary school. It contains a lot of interesting social, gender and study information about students. In this experiment, only math dataset is used. 
+The student performance dataset is used in this experiment as the motivation example dataset. This dataset can be downloaded from Kaggle \footnote{https://www.kaggle.com/uciml/student-alcohol-consumption} and UCI ML website \footnote{https://archive.ics.uci.edu/ml/datasets/student+performance}. This dataset has 28 attributes, 5 measures, and four aggregate functions are used in this experiments. The data were obtained in a survey of students math and Portuguese language courses in secondary school. It contains a lot of interesting social, gender and study information about students. In this experiment, only math dataset is used. 
 
 For instance, the analyst want to compare between students who want to continue their study to the higher education and students who do not want to continue their study to higher education. Figure \ref{fig:motivation_dataset} shows two views that have the highest importance score: 1) A = studytime, M = final grade, and F = AVG, the importance score is 0.812831582477977; 2) A = studytime, M = final grade, and F = MAX, the importance score is 0.797221012363291. This Figure shows that without diversity, recommended views may suffer from redundancy. 
 
@@ -115,15 +116,14 @@ Figure \ref{fig:motivation_dataset} also shows that students who want to continu
 \section{Distance Functions}
 
 
-In terms of distance functions, I have been looking for the bounded distance function to compare between two probability distributions, there are several distance functions that I have studied: 
+There are several distance functions that can be used to compare two probability distributions as follows:
 
 \begin{itemize}
-	\item Kullback-Leiber (KL) distance, this distance is not bounded, the mathematically proof can be seen below.
+	\item Kullback-Leiber (KL) distance is not bounded, the mathematically proof can be seen below.
 	\item Euclidean distance, currently is used and the maximum bound is $ \sqrt{2} $.
-	\item Earth Mover Distance (EMD), this distance is widely used and very good for comparing two probability distributions. Mostly this distance used in computer vision application to compare between two histograms. However, based on my finding, this distance is not bounded as well.
-	\item Kolmogorov Distance has the maximum bound equal to 1. However, mostly example code that I found uses this distance as hypothesis test that need another parameters such as $\alpha$ and confidence interval. 
+	\item Earth Mover Distance (EMD), this distance is widely used and very good for comparing two probability distributions. Mostly this distance used in computer vision application to compare between two histograms. However, this distance is not bounded as well.
+	\item Kolmogorov Distance has the maximum bound equal to 1. However, this distance generally is used as hypothesis test that need another parameters such as $\alpha$ and confidence interval. 
 \end{itemize}
-Until now, I am not sure if there is a bounded distance function that can be used for our work except the Euclidean distance. 
 
 
 
@@ -148,8 +148,6 @@ then
 $$KL(P\vert\vert Q) = \int \frac{1}{\pi}\,\frac{1}{1+x^2} \log p(x) \,\text{d}x + \int \frac{1}{\pi}\,\frac{1}{1+x^2} [\log(2\pi)/2+x^2/2]\,\text{d}x$$
 and
 $$\int \frac{1}{\pi}\,\frac{1}{1+x^2} x^2/2\,\text{d}x=+\infty$$
-
-In conclusion, Kullback-Leibler (KL) is not bounded. For instance, when I implement KL in my code. In some case while the bin does not has its pair in the reference (which means 0), the result are two posibilities: error devided by 0 or $ log\ 0 $ which is undefined. 
 
 
 \subsection{Euclidean Maximum bound}
@@ -204,8 +202,7 @@ The example variance of $ setDist $ score using Flights dataset between MaxSum d
 \end{table}
 
 
-Due to this different diversity score, MaxMin diversification can improve the pruning performance as shown in the Figure \ref{fig:maxsum-maxmin-greedy-swap}. However, this MaxMin makes unbalance between the importance score and diversity score. The maximum diversity can be equal to $ 1 $ while the value of importance score is lower than that. This thing makes the shape of objective function unbalance. Please see Figure \ref{fig:Objective-function-maxsum-maxmin} below for more details.
-
+Due to this different diversity score, MaxMin diversification can improve the pruning performance as shown in the Figure \ref{fig:maxsum-maxmin-greedy-swap}. However, this MaxMin makes unbalance between the importance score and diversity score. The maximum diversity can be equal to $ 1 $ while the value of importance score is lower than that. This thing makes the shape of objective function unbalance as shown in Figure \ref{fig:Objective-function-maxsum-maxmin}.
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=3.0in]{figures/1_tradeoff_June_objf_disease_maxSUM}
@@ -222,12 +219,7 @@ Due to this different diversity score, MaxMin diversification can improve the pr
 
 It has been discussed in the first section that one of the weekness of DiVE-Greedy is the initialization set. DiVE-Greedy uses only two views as the initialization of set $S$. This condition may reduce the chance of pruning due to many views in $X$ will have same $setDist$ score in the first Greedy iteration. In order to overcome this issue, DiVE-dSwap is proposed. DiVE-dSwap uses swap technique that has bigger number of views in the initialization set $S$, which is the size of set $S$ = $k$. In this experiment, we use $k = 5$ as the minimum.  
 
-To observe the impact of $k$ to pruning performance while the $\lambda$ is constant. In this experiment, we run DiVE-Greedy-Adaptive and DiVE-dSwap-Adaptive on Flights dataset, using 5 queries, $\lambda = 0.5$ and different number of $k$. Figure \ref{fig:impact-of-k-pruning-performance} shows the result of both schemes.
-
-Overall, the pruning performance is decreasing while $k$ is increasing. This result follows the expectation, while $k$ increase, the number of iteration will be increased. Increasing the number of iterations means more views need to be executed. 
-
-Coba kalau k = 2 di Greedy dan Swap bedane opo jal? hehe
-
+To observe the impact of $k$ to pruning performance while the $\lambda$ is constant, we run DiVE-Greedy-Adaptive and DiVE-dSwap-Adaptive on Flights dataset, using 5 queries, $\lambda = 0.5$ and different value of $k$. Figure \ref{fig:impact-of-k-pruning-performance} shows the result of both schemes. Overall, the pruning performance is decreasing while $k$ is increasing. This result follows the expectation, while $k$ increase, the number of iteration will be increased. Increasing the number of iterations means more views need to be executed and less views are pruned. 
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=4.0in]{figures/Impact_k_performance}
@@ -237,6 +229,23 @@ Coba kalau k = 2 di Greedy dan Swap bedane opo jal? hehe
 		
 	\end{center}
 \end{figure}
+
+Moreover, There are some interesting finding from Figure \ref{fig:impact-of-k-pruning-performance}. Overall, DiVE-dSwap-Adaptive has better performance compared to DiVE-Greedy-Adaptive in terms of the number of pruned queries. This is because the diversity of $setDist$ score. In case of DiVE-Greedy-Adaptive, no matter how many views inside the set $S$ (i.e., size of $k$), Greedy always start with two most distant views as the initialization set $S$. Consequently, there will be many candidate views in $X$ have same $setDist$ score in the first Greedy iteration that may reduce the chance of pruning (i.e., the effect of diversity of $setDist$ score). Meanwhile,  DiVE-dSwap-Adaptive has higher number of views in the initialization set $S$ (i.e., in this experiment, we used $k = 5$ as the minimum). Hence, the $setDist$ score on DiVE-dSwap-Adaptive is more diverse than DiVE-Greedy-Adaptive in the first iteration and next iteration as well. 
+
+To confirm that, we did experiments that the results can be seen in the Figure \ref{fig:impact-of-k-pruning-performance}. Figure \ref{fig:impact-of-k-pruning-performance} shows DiVE-dSwap-Adaptive has better performance compared to DiVE-Greedy-Adaptive. However, DiVE-Greedy-Adaptive and DiVE-dSwap-Adaptive have almost same number of pruned queries while the number of $k$ is small such as $k=3$. While $k=3$, Greedy has two most distant views in the initialization set $S$ and it only needs one Greedy iteration to generate the recommended views. Meanwhile, Swap has three views as the initialization, it needs to exchange the candidate views in $X$ to set $S$ until the set $S$ has the optimal $F(S)$. In this case, both algorithms will have same condition in terms of $setDist$ calculation (i.e., the distance between each view in $X$ to two views in set $S$). Hence, the Figure shows both algorithms have same performance while $k = 3$. This results indicate that the diversity of $setDist$ scores affects the performance of pruning. 
+
+
+
+%In this condition, the diversity of $setDist$ score of both algorithms are same.  
+%
+%Almost in all $k$, DiVE-dSwap-Adaptive has better performance compared to DiVE-Greedy-Adaptive in terms of the number of pruned queries. This is because of the number of initialization set $S$, as shown in the Figure while the number of initialization set is close such as $k = 3$, both algorithms have close performance and the gap is higher while $k$ is increasing. The number of initialization set $S$ causes the diversity of $setDist$ score. 
+%
+%
+%Moreover, both algorithms also have close number of pruned queries while the number of $k$ is high such as $k=25$. 
+
+
+
+
 
 
 
@@ -263,6 +272,249 @@ Meanwhile, The costs of Swap algorithm is also depend on the query execution tim
 
 The different of total cost between Greedy and Swap approach can be seen in Figure \ref{fig:flight_costs_all}. Meanwhile, the impact of $k$ to the distance computation time while running on Flights dataset can bee seen in Figure \ref{fig:impact-of-k-diversity-computation}.
 
+
+\begin{algorithm}
+	\SetAlgoVlined
+	\DontPrintSemicolon
+	%This is to hide Begin keyword
+	\SetKwBlock{Begin}{}{end}
+	\KwIn{Set of views V and result set $S$ize k }
+	\KwOut{Result set $ S \geq V $, size S = k}  
+	\SetKwFunction{FgetL}{getL}
+	$S \leftarrow $ two most distant views\;
+	$X \leftarrow  \left[V \backslash S\right]$\;
+	
+	
+	
+	\SetKwFunction{FgetL}{getL}
+	\SetKwProg{Fn}{function}{:}{}
+	\Fn{\FgetL{$f$,$S$, $X$,$L$}}{
+		\For{$X_i$ in set $X$}{
+			\For{$S_j$ in set $S$}{
+				$ d  \leftarrow setDist\left(X_i,S \right) $\;
+				$ 	X' \leftarrow [ X_i, d]$\;
+				$ 	L.append(X')$\;
+			}
+		}
+		$ 	L \leftarrow sorted\_by\_d(L) $\;
+		
+		\KwRet\;
+	}
+	
+	$maxI, max_b \leftarrow 0, \sqrt{2} $\;
+	$ rectify \leftarrow False $\;
+	$ S_{rectify}, L_{rectify}   \leftarrow S, getL(S,X) $\;
+	\;
+	\While{$i < k$}{
+		\If{$ max_b == \sqrt{2}$}{
+			$samples \leftarrow get\_samples(PI)$\;
+			$maxI\_S \leftarrow get\_maxI(S)$\;
+			$maxI\_samples \leftarrow get\_maxI(samples)$\;
+			
+			\If{ $ maxI\_S > maxI $}{
+				$ maxI \leftarrow maxI\_S$
+			}
+			\If{ $ maxI\_samples> maxI $}{
+				$ maxI \leftarrow maxI\_samples$
+			}
+			$max_b \leftarrow maxI$			
+			
+		}
+		
+		$ S' \leftarrow S $\;
+		$ L \leftarrow getL(S,X) $\;
+		
+		
+		
+		\For{$L_i$ in $L$}{
+			
+			\If{ $ F\left(S'\right) < F\left(S \cup X_i, max_b\right) $}{
+				$ 	L'.append(L_i)$\;
+			}
+			$ I \leftarrow get\_I\_score(L'_i) $\;
+			\If{ $ F\left(S'\right) < F\left(S \cup X_i, I\right) $}{
+				$ S'  \leftarrow S \cup X_i $  \;
+			}
+			\eIf{ $ I > max_b $}{
+				$ max_b \leftarrow I $\;
+				$ rectify = True $\;
+				$ break (Out\ of\ Loop) $\;
+			}{
+				$ rectify = False $\;
+			}
+			
+		}
+		
+		
+		
+		\eIf{rectify == True}{
+			$ S, S' \leftarrow S_{rectify} $ \;
+			$ L \leftarrow L_{rectify} $ \;
+			$i \leftarrow  len(S)$ \;
+			
+			
+		}{
+			
+			
+			\If{ $ F\left(S'\right) > F\left(S\right) $}{
+				$ S  \leftarrow S'$\;
+				
+			}
+			$i = i + 1  $
+			
+		}
+	
+		
+		%
+		%\If{ $ F\left(S'\right) > F\left(S\right) $}{
+		%	$ S  \leftarrow S'$
+		%	$  improve \leftarrow  True $\;
+		%	
+		%	}{
+		%		$improve \leftarrow  False $\;
+		%	
+		%	}
+	}
+	$return S$
+	\caption{\textit{DiVE} Greedy Pruning Rectifying}\label{DiVE-Greedy-Pruning-Rectifying}
+\end{algorithm}
+
+
+% Pruning Pseudocode
+
+\begin{algorithm}
+	\SetAlgoVlined
+	\DontPrintSemicolon
+	%This is to hide Begin keyword
+	\SetKwBlock{Begin}{}{end}
+	\KwIn{Set of views V and result set $S$ize k }
+	\KwOut{Result set $ S \geq V $, size S = k}  
+ 	\SetKwFunction{FgetL}{getL}
+	$S \leftarrow $ Result set of only diversity\;
+	$X \leftarrow  \left[V \backslash S\right]$\;
+
+	
+	
+	\SetKwFunction{FgetL}{getL}
+	\SetKwProg{Fn}{function}{:}{}
+	\Fn{\FgetL{$f$,$S$, $X$,$L$}}{
+		\For{$X_i$ in set $X$}{
+			\For{$S_j$ in set $S$}{
+				$ d  \leftarrow setDist\left(X_i,S \backslash S_j\right) $\;
+				$ 	X' \leftarrow [S_j, X_i, d]$\;
+				$ 	L.append(X')$\;
+			}
+		}
+		$ 	L \leftarrow sorted\_by\_d(L) $\;
+		
+		\KwRet\;
+	}
+
+$F_{current}, maxI, max_b \leftarrow 0, 0, \sqrt{2} $\;
+$  improve, rectify \leftarrow  True, False $\;
+$ S_{rectify}, L_{rectify}   \leftarrow S, getL(S,X) $\;
+	\;
+	\While{improve = True}{
+		\If{$ max_b == \sqrt{2}$}{
+			$samples \leftarrow get\_samples(PI)$\;
+			$maxI\_S \leftarrow get\_maxI(S)$\;
+			$maxI\_samples \leftarrow get\_maxI(samples)$\;
+			
+			\If{ $ maxI\_S > maxI $}{
+				$ maxI \leftarrow maxI\_S$
+			}
+			\If{ $ maxI\_samples> maxI $}{
+				$ maxI \leftarrow maxI\_samples$
+			}
+			$max_b \leftarrow maxI$			
+			
+		}
+	
+		$ S' \leftarrow S $\;
+		$ L \leftarrow getL(S,X) $\;
+		
+		
+		
+		\For{$L_i$ in $L$}{
+			
+			\If{ $ F\left(S'\right) < F\left(S \backslash S_j \cup X_i, max_b\right) $}{
+				$ 	L'.append(L_i)$\;
+			}
+			$ I \leftarrow get\_I\_score(L'_i) $\;
+			\If{ $ F\left(S'\right) < F\left(S\backslash S_j \cup X_i, I\right) $}{
+				$ S'  \leftarrow S \backslash j \cup X_i $  \;
+			}
+			\eIf{ $ I > max_b $}{
+				$ max_b \leftarrow I $\;
+				$ rectify = True $\;
+				$ break (Out\ of\ Loop) $\;
+			}{
+			$ rectify = False $\;
+		}
+			
+		}
+		
+		
+		
+		\eIf{rectify == True}{
+			$ S, S' \leftarrow S_{rectify} $ \;
+			$ L \leftarrow L_{rectify} $ \;
+			$improve \leftarrow  True$ \;
+			
+			
+		}{
+			
+			
+			\If{ $ F\left(S'\right) > F\left(S\right) $}{
+				$ S  \leftarrow S'$\;
+				
+			}
+			
+			\eIf{ $ F\left(S\right) > F_{current} $}{
+				$ F_{current}  \leftarrow F\left(S\right) $\;
+				$  improve \leftarrow  True $\;
+				
+			}{
+				$improve \leftarrow  False $\;
+				
+			}
+			
+		}
+		
+		%
+		%\If{ $ F\left(S'\right) > F\left(S\right) $}{
+		%	$ S  \leftarrow S'$
+		%	$  improve \leftarrow  True $\;
+		%	
+		%	}{
+		%		$improve \leftarrow  False $\;
+		%	
+		%	}
+	}
+	$return S$
+	\caption{\textit{DiVE} dSwap Pruning Rectifying}\label{DiVE-dSwap-Pruning-Rectifying}
+\end{algorithm}
+
+
+
+
+\section{Correcting wrong maximum bound in adaptive pruning scheme}
+
+
+As explained in the first section, DiVE schemes utilize the importance score bound to do pruning. There are two techniques proposed: 1) static bound and 2) adaptive bound. In the static bound, the theoritical maximum bound ($ \sqrt{2} $) is used and this bound will not be changed until the end of running. Meanwhile, adaptive used the theoritical maximum bound ($ \sqrt{2} $) as the first, then this bound is updated while the maximum bound of actual importace score of views has been known. 
+
+
+In order to know when the bound should be updated, samping based on prediction interval is used. Before running the program, user needs to defined what PI that she wants to use. For instance, while users set PI to 80 means after 9 views are executed, then the current bound will be updated to the maximum importance score which have seen so far. Generally, PI can be defined as following: 
+
+\begin{itemize}[noitemsep]
+	\item PI80: need to execute 9 views
+	\item PI85: need to execute 12 views
+	\item PI90: need to executes 20 views
+	\item PI95: need to executes 40 views
+	\item PI97: need to executes 60 views
+\end{itemize}
+
+
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=4.0in]{figures/impact_of_k_to_diversity_cost}
@@ -275,9 +527,72 @@ The different of total cost between Greedy and Swap approach can be seen in Figu
 
 
 
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=7.0in]{figures/rectifying_bound_2}
+		\vspace{-8pt}
+		\caption{Rectifying maximum bound on adaptive pruning scheme}
+		\label{fig:rectifying_bound_2}
+		
+	\end{center}
+\end{figure}
+
+
+%As shown in the Figure \ref{fig:DiVE-Greedy} and \ref{fig:adaptive-pruning-performance}, the adaptive bound has a better performance of pruning compared to the static one. 
+
+Adaptive scheme has the best pruning performance while PI80 is used. However, it reduces the effectiveness of recommended views due to only small number of executed views are needed for PI80 which increase probability to have wrong bound. The safest way is to use higher PI such as PI95 or PI97. However, if there is a way to keep using PI80 without reducing effectiveness, it will definitely be very good. In fact, the goal of pruning scheme is to minimize query view execution (i.e., use low PI) without reducing the quality of recommended views. 
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=3.0in]{figures/pruning_performance_greedy_rectifying}
+		\includegraphics[width=3.0in]{figures/pruning_performance_dswap_rectifying}
+		\caption{Pruning performance of rectifying bound schemes compared to others}
+		\label{fig:rectifying_bound_greedy_dswap}
+	\end{center}
+\end{figure}
+
+In order to overcome this issue, rectifying bound of adaptive pruning is proposed. The algorithm of rectifying bound strategy is quite simple as shown in Figure \ref{fig:rectifying_bound_2}. For instance, there are $V_n$ of number of views in $X$ and user uses PI80. First, the theoritical maximum bound ($ \sqrt{2} $) is used such as in the static approach. In this step, some low-quality views may be pruned. Afterward, As shown in Figure \ref{fig:rectifying_bound_2}, nine query views are executed in advanced then the estimated maximum bound is obtained from nine executed views and the views in the initialization set $S$. The blue dash line shows the first time of maximum bound is changed from the theoritical bound to the estimated maximum bound (i.e., maximum importance score of views have seen so far). In this step, many low-quality views are pruned. The current version of adaptive pruning scheme will consider these pruned views as the final pruned views, however, rectifying bound mechanism will bring back these pruned views while higher importance score is found in the next iteration. 
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=3.0in]{figures/rectifiying_error_f_s_greedy}
+		\includegraphics[width=3.0in]{figures/rectifiying_error_f_s_dswap}
+		\caption{Error $F(S)$ after rectifying bound}
+		\label{fig:error_fs_adaptive}
+	\end{center}
+\end{figure}
+
+As shown in the example, the higher importance score are found (i.e., $V_{30}$,$V_{55}$,$V_{100}$). All pruned views from the previous steps will be returned and evaluated again while the schemes find higher importance score in the next execution. Then, the maximum bound will be updated to the highest importance score. The scheme will repeat this step until no importance score that higher than the current maximum bound. The results of this strategy can be seen in Figure \ref{fig:rectifying_bound_greedy_dswap} and Figure \ref{fig:error_fs_adaptive}. 
+
+Figure \ref{fig:rectifying_bound_greedy_dswap} shows the performance of adaptive pruning scheme with rectifying bound strategy compared to without rectifying bound strategy. The pruning peformance after applying rectifying bound strategy quite close to without rectifying bound strategy. Meanwhile, as shown in Figure \ref{fig:error_fs_adaptive} there is no effectiveness loss after rectifying bound is implemented. However, Figure \ref{fig:rectifying_cost} shows the additional cost of the rectifying bound strategy. 
+
+%The current version of adaptive schemes do not have rectifying bound mechanism.
+
+
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=4.0in]{figures/rectifying_cost}
+		\vspace{-8pt}
+		\caption{Rectifying bound strategy cost, $k = 5, \lambda = 0.5$}
+		\label{fig:rectifying_cost}
+		
+	\end{center}
+\end{figure}
+
+
+
+%\begin{figure}
+%	\begin{center}
+%		\includegraphics[width=4.0in]{figures/error_f_s}
+%		\vspace{-12pt}
+%		\caption{Impact of $k$ to diversity computation running on Flights dataset}
+%		\label{fig:error_fs_adaptive}
+%		
+%	\end{center}
+%\end{figure}
+
 \section{Query sharing computation}
 
-Beside using pruning, SeeDB used query sharing optimizaation to reduce the query executions as well. To do query sharing optimization, SeeDB used combine multiple aggregates, combine multiple GROUP BY, and combine target and reference view query. However, pruning and query sharing seem two kinds of orthogonal optimizations. Hence, SeeDB proposed \textit{phased execution framework} which was by dividing dataset to phases. For instance, if we have 100,000 records in our dataset and we use 10 phases, the $i = 4^{th}$ processes records 30,001 - 40,000. 
+Beside using pruning, SeeDB used query sharing optimizaation to reduce the query executions. To do query sharing optimization, SeeDB used techniques such as: combine multiple aggregates, combine multiple GROUP BY, and combine target and reference view query. However, pruning and query sharing seem two kinds of orthogonal optimizations. Hence, SeeDB proposed \textit{phased execution framework} which was by dividing dataset to phases. For instance, if we have 100,000 records in our dataset and we use 10 phases, the $i = 4^{th}$ processes records 30,001 - 40,000. 
 
 In fact, SeeDB used partial result of each aggregate view on the fractions and used it to estimate the quality of each view and prune low-quality views in each phase. The query sharing optimization is used to minimize scans on the fraction of dataset in each phase whereas the pruning-based optimization is processed in the end of each phase.
 
@@ -285,15 +600,150 @@ If we see the SeeDB proposed approach, they divided the data to many phases and 
 
 In case of our work, we sorted the remaining views based on $setDist$ score and execute the query view one by one start from the top and we need to know the importance score of executed view in order to get the current $ F(S) $ and to update the maximum bound. We also assume that by sorting the views based on $setDist$ the chance view is similar to others view in the above and below position are low. It means that to do query sharing execution by combining multiple aggregate or GROUP BY is difficult. There is no possibility to collect all views with same aggregate function or GROUP BY then execute in the same time due to we need to know the importance score of each view one by one.     
 
-\section{Correcting wrong maximum bound in adaptive pruning scheme}
-I developed a program that able to store all bound changed and pruned views in each bound changed. This program is not correcting the bound and bring back pruned views directly while the program realizes that the maximum bound is wrong. That is because while that approach is used, the program may face never ending looping because it repeats the previous wrong step while the maximum bound is wrong. The worst case happens while the view which has the maximum bound is in the below position of list $ X $, if the direct fixing approach is applied then the program always repeat previous step which has wrong maximum bound. 
-
-In order to overcome this issue, this program runs until the end without caring the wrong maximum bound. Then, instead of showing the result to the user in the end of running, this program will re-run using the maximum bound that is founded in the first run which definitly the correct maximum bound. However, this approach seems running the program twice and it makes double execution time. 
-
 
 \end{document}
 
 
+
+% Pruning Pseudocode
+
+\begin{algorithm}
+	\SetAlgoVlined
+	%This is to hide Begin keyword
+	\SetKwBlock{Begin}{}{end}
+	\KwIn{Set of views V and result set $S$ize k }
+	\KwOut{Result set $ S \geq V $, size S = k}  
+	$S \leftarrow $ Result set of only diversity\;
+	$X \leftarrow  \left[V \backslash S\right]$\;
+	$F_{current} \leftarrow 0 $\;
+	$  improve \leftarrow  True $\;
+	$ max_b  \leftarrow\sqrt{2} $\;
+	%$ S_{rectify}  \leftarrow [] $\;
+	%$ X_{rectify}  \leftarrow [] $\;
+	\While{improve = True}{
+		%$ X' \leftarrow [] $\;
+		\For{$X_i$ in set $X$}{
+			\For{$S_j$ in set $S$}{
+				$ d  \leftarrow setDist\left(X_i,S \backslash S_j\right) $\;
+				$ 	newX \leftarrow [S_j, X_i, d]$\;
+				$ 	X'.append(newX)$\;
+			}
+		}
+		$ 	X' \leftarrow sorted\_by\_d(X') $\;
+		$ S' \leftarrow S $\;
+		$ rectify  = False $\;
+		\eIf{ $ max_b == \sqrt{2} $}{
+			\For{$i$ in set $X'$}{
+				
+				\If{ $ F\left(S'\right) < F\left(S \backslash X'[i][0] \cup X'[i][1], max_b\right) $}{
+					$ 	X''.append(X'[i][1])$\;
+				}
+			}
+			
+			$n \leftarrow pi - len(S)$\;
+			$samples \leftarrow X''[0\colon n]$\;
+			$maxI\_S \leftarrow get\_maxI(S)$\;
+			$maxI\_samples \leftarrow get\_maxI(samples)$\;
+			
+			\If{ $ maxI\_S > maxI $}{
+				$ maxI \leftarrow maxI\_S$
+			}
+			\If{ $ maxI\_samples> maxI $}{
+				$ maxI \leftarrow maxI\_samples$
+			}
+			$max\_b \leftarrow maxI$	
+			
+			\For{$i$ in set $X''$}{
+				\For{$j$ in set $S$}{
+					\If{ $ F\left(S'\right) < F\left(S \backslash S_j \cup X''[i], max_b\right)  $}{
+						$ 	X'''.append(X''[i])$\;
+						
+					}
+					$ I \leftarrow get\_I\_score(X'''[i]) $\;
+					\If{ $ F\left(S'\right) < F\left(S \backslash S_j \cup X'''[i], I\right) $}{
+						$ S'  \leftarrow S \backslash j \cup X'''[i] $  \;
+					}
+					\If{ $ I > max_b $}{
+						$ max_b \leftarrow I $\;
+						$ rectify = True $\;
+						$ break (Out\ of\ Loop) $\;
+					}
+				}
+			}
+			
+		}{ 
+			
+			
+		}
+		%
+		%\If{ $ F\left(S'\right) > F\left(S\right) $}{
+		%	$ S  \leftarrow S'$
+		%	$  improve \leftarrow  True $\;
+		%	
+		%	}{
+		%		$improve \leftarrow  False $\;
+		%	
+		%	}
+	}
+	%return S
+	\caption{\textit{DiVE} dSwap Pruning Rectifying}\label{DiVE-dSwap-Pruning-Rectifying}
+\end{algorithm}
+
+\begin{algorithm}
+	\LinesNumbered
+	\setcounter{AlgoLine}{37}
+	% This is to restore vline mode if you did not take the package as \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+	\SetAlgoVlined
+	%This is to hide Begin keyword
+	\SetKwBlock{Begin}{}{end}
+	\Begin{
+		\eIf{...}{...}
+		{
+			
+			\For{$X_i$ in set $X'$}{
+				\If{ $ F\left(S'\right) < F\left(S \backslash X'[i][0] \cup X'[i][1], max_b\right) $}{
+					$ 	X''.append(X'[i][1])$\;
+				}
+				$ I \leftarrow get\_I\_(X''[i]) $\;
+				\If{ $ F\left(S'\right) < F\left(S \backslash S_j \cup X''[i], I\right) $}{
+					$ S'  \leftarrow S \backslash j \cup X''[i] $  \;
+				}
+				\If{ $ I > max\_b $}{
+					$ max\_b \leftarrow I $ \;
+					$ rectify = True $\;
+					$ break (Out\ of\ Loop) $\;
+				}
+				
+			}
+			
+		}
+		
+		\eIf{rectify == True}{
+			$improve \leftarrow  True$ \;
+			
+			
+		}{
+			
+			
+			\If{ $ F\left(S'\right) > F\left(S\right) $}{
+				$ S  \leftarrow S'$\;
+				
+			}
+			
+			\eIf{ $ F\left(S\right) > F_{current} $}{
+				$ F_{current}  \leftarrow F\left(S\right) $\;
+				$  improve \leftarrow  True $\;
+				
+			}{
+				$improve \leftarrow  False $\;
+				
+			}
+			
+		}
+		
+	}   
+	$return S$ 
+\end{algorithm}
 
 %\section{Proposed algorithm's Figure}
 %We proposed DiVE scheme using two kinds of popular heuristic approach which are Greedy and Swap techniques. Figure \ref{fig:algorithm-figure} shows our proposed scheme technique. In case of Greedy, the set $ S $ is initialized by two most distant views. In each iteration, the best view in $ X $ that can maximize objective function $F(S)$ will be added to the set $ S $. Meanwhile, for the Swap case, the set $ S $ is initialized by the most diverse $  k $ views and in each iteration, all candidates views in $ X $ will be interchanged to set $ S $ and view which can improve the current objective function $F(S)$ will replace a view in set $ S $.
