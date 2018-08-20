@@ -87,7 +87,7 @@
 	%$ rectify \leftarrow False $\;
 	$ L_{base}, S_{base},S'_{base}   \leftarrow getL(S,X), S, S \cup L[X_1] $\;
 	$max_b \leftarrow getMaxPI(S,X) $	\;
-	$rectify, step\_back \leftarrow False, 3 $	\;
+	$rectify \leftarrow False $	\;
 	\;
 	\While{$i < k$}{
 
@@ -123,20 +123,20 @@
 	
 		
 		\eIf{ $ rectify == True $}{
-		\eIf{$step\_back < i - 2$}{
-%		$ S, S' \leftarrow S_{base} $ \;
-%	$ L \leftarrow L_{base} $ \;
-%	$i \leftarrow  2$ \;	
-	$ G \leftarrow fetchTempResult(i- step\_back)$\;
-$ S, S' \leftarrow G[S], G[S'] $ \;
-$ L \leftarrow G[L] $ \;
-$i = i- step\_back  $\;
-	}{
+%		\If{$step\_back < i - 2$}{
+%%		$ S, S' \leftarrow S_{base} $ \;
+%%	$ L \leftarrow L_{base} $ \;
+%%	$i \leftarrow  2$ \;	
+%	$ G \leftarrow fetchTempResult(i- step\_back)$\;
+%$ S, S' \leftarrow G[S], G[S'] $ \;
+%$ L \leftarrow G[L] $ \;
+%$i = i- step\_back  $\;
+%	}
+
 		$ S, S' \leftarrow S_{base},S'_{base}  $ \;
 	$ L \leftarrow L_{base} $ \;
 	$i \leftarrow  2$ \;	
 
-}
 		
 		
 	}{
@@ -216,7 +216,7 @@ $i = i- step\_back  $\;
 %	\KwRet\;
 %}
 
-$F_{current}, counter, step\_back \leftarrow 0,0, 3$\;
+$F_{current}, counter \leftarrow 0,0$\;
 $ improve, rectify \leftarrow  True, False $\;
 $ S_{base}, L_{base}   \leftarrow S, getL(S,X) $\;
 	$max_b \leftarrow getMaxPI(S,X) $	\;
@@ -252,16 +252,16 @@ $ S_{base}, L_{base}   \leftarrow S, getL(S,X) $\;
 		
 		
 		\eIf{$rectify == True$}{
-			\eIf{$step\_back < counter $}{
-	
-					$ G \leftarrow fetchTempResult(counter - step\_back)$\;
-				$ S, S' \leftarrow G[S], G[S'] $ \;
-				$ L \leftarrow G[L] $ \;
-			}{
+%			\eIf{$step\_back < counter $}{
+%	
+%					$ G \leftarrow fetchTempResult(counter - step\_back)$\;
+%				$ S, S' \leftarrow G[S], G[S'] $ \;
+%				$ L \leftarrow G[L] $ \;
+%			}{	}
 					$ S, S' \leftarrow S_{base} $ \;
 					$ L \leftarrow L_{base} $ \;
 					$counter = 0$
-	}
+
 			$  improve \leftarrow  True $\;
 			
 			
