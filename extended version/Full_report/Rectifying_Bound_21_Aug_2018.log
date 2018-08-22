@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.2.23)  20 AUG 2018 21:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.2.23)  22 AUG 2018 12:23
 entering extended mode
 **./Rectifying_Bound_21_Aug_2018.tex
 (Rectifying_Bound_21_Aug_2018.tex
@@ -375,72 +375,149 @@ Package caption Info: End \AtBeginDocument code.
 \AtBeginShipoutBox=\box38
 Package atbegshi Info: Shipout page discarded.
  [1{C:/Users/uqrmafru/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+<figures/rectify_logic.pdf, id=7, pagebox=cropbox, 963.6pt x 542.025pt>
+File: figures/rectify_logic.pdf Graphic file (type pdf)
+<use figures/rectify_logic.pdf>
+Package pdftex.def Info: figures/rectify_logic.pdf  used on input line 43. on i
+nput line 43.
+Package pdftex.def Info: Requested size: 505.89pt x 284.55911pt on input line 4
+3.
 
-LaTeX Warning: Float too large for page by 14.38104pt on input line 303.
+Overfull \hbox (36.13498pt too wide) in paragraph at lines 43--45
+ [] 
+ []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 317.
+<figures/get_I_score.pdf, id=8, pagebox=cropbox, 963.6pt x 542.025pt>
+File: figures/get_I_score.pdf Graphic file (type pdf)
+<use figures/get_I_score.pdf>
+Package pdftex.def Info: figures/get_I_score.pdf  used on input line 53. on inp
+ut line 53.
+Package pdftex.def Info: Requested size: 505.89pt x 284.55911pt on input line 5
+3.
 
+Overfull \hbox (36.13498pt too wide) in paragraph at lines 53--55
+ [] 
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 70.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 317.
-<figures/pruning_performance_greedy_rectifying_step_back.pdf, id=7, pagebox=cro
-pbox, 416.55624pt x 265.99374pt>
-File: figures/pruning_performance_greedy_rectifying_step_back.pdf Graphic file 
-(type pdf)
-<use figures/pruning_performance_greedy_rectifying_step_back.pdf>
-Package pdftex.def Info: figures/pruning_performance_greedy_rectifying_step_bac
-k.pdf  used on input line 379. on input line 379.
-Package pdftex.def Info: Requested size: 216.81pt x 138.44742pt on input line 3
-79.
-<figures/pruning_performance_dswap_rectifying_step_back.pdf, id=8, pagebox=crop
-box, 416.55624pt x 265.99374pt>
-File: figures/pruning_performance_dswap_rectifying_step_back.pdf Graphic file (
-type pdf)
-<use figures/pruning_performance_dswap_rectifying_step_back.pdf>
-Package pdftex.def Info: figures/pruning_performance_dswap_rectifying_step_back
-.pdf  used on input line 380. on input line 380.
-Package pdftex.def Info: Requested size: 216.81pt x 138.44742pt on input line 3
-80.
-<figures/rectifiying_error_f_s_greedy.pdf, id=9, pagebox=cropbox, 404.51125pt x
- 265.99374pt>
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 70.
+ [1 <./figures/rectify_logic.pdf>] [2 <./figures/get_I_score.pdf>]
+<figures/pruning_performance_greedy_adaptive_rectifying_80.pdf, id=66, pagebox=
+cropbox, 416.55624pt x 265.99374pt>
+File: figures/pruning_performance_greedy_adaptive_rectifying_80.pdf Graphic fil
+e (type pdf)
+<use figures/pruning_performance_greedy_adaptive_rectifying_80.pdf>
+Package pdftex.def Info: figures/pruning_performance_greedy_adaptive_rectifying
+_80.pdf  used on input line 94. on input line 94.
+Package pdftex.def Info: Requested size: 216.81pt x 138.44742pt on input line 9
+4.
+<figures/pruning_performance_dswap_adaptive_rectifying_80.pdf, id=67, pagebox=c
+ropbox, 416.55624pt x 265.99374pt>
+File: figures/pruning_performance_dswap_adaptive_rectifying_80.pdf Graphic file
+ (type pdf)
+<use figures/pruning_performance_dswap_adaptive_rectifying_80.pdf>
+Package pdftex.def Info: figures/pruning_performance_dswap_adaptive_rectifying_
+80.pdf  used on input line 95. on input line 95.
+Package pdftex.def Info: Requested size: 216.81pt x 138.44742pt on input line 9
+5.
+<figures/pruning_performance_greedy_adaptive_rectifying_90.pdf, id=68, pagebox=
+cropbox, 416.55624pt x 265.99374pt>
+File: figures/pruning_performance_greedy_adaptive_rectifying_90.pdf Graphic fil
+e (type pdf)
+<use figures/pruning_performance_greedy_adaptive_rectifying_90.pdf>
+Package pdftex.def Info: figures/pruning_performance_greedy_adaptive_rectifying
+_90.pdf  used on input line 105. on input line 105.
+Package pdftex.def Info: Requested size: 216.81pt x 138.44742pt on input line 1
+05.
+<figures/pruning_performance_dswap_adaptive_rectifying_90.pdf, id=69, pagebox=c
+ropbox, 416.55624pt x 265.99374pt>
+File: figures/pruning_performance_dswap_adaptive_rectifying_90.pdf Graphic file
+ (type pdf)
+<use figures/pruning_performance_dswap_adaptive_rectifying_90.pdf>
+Package pdftex.def Info: figures/pruning_performance_dswap_adaptive_rectifying_
+90.pdf  used on input line 106. on input line 106.
+Package pdftex.def Info: Requested size: 216.81pt x 138.44742pt on input line 1
+06.
+<figures/pruning_performance_greedy_adaptive_rectifying_97.pdf, id=70, pagebox=
+cropbox, 416.55624pt x 265.99374pt>
+File: figures/pruning_performance_greedy_adaptive_rectifying_97.pdf Graphic fil
+e (type pdf)
+<use figures/pruning_performance_greedy_adaptive_rectifying_97.pdf>
+Package pdftex.def Info: figures/pruning_performance_greedy_adaptive_rectifying
+_97.pdf  used on input line 115. on input line 115.
+Package pdftex.def Info: Requested size: 216.81pt x 138.44742pt on input line 1
+15.
+<figures/pruning_performance_dswap_adaptive_rectifying_97.pdf, id=71, pagebox=c
+ropbox, 423.5825pt x 265.99374pt>
+File: figures/pruning_performance_dswap_adaptive_rectifying_97.pdf Graphic file
+ (type pdf)
+<use figures/pruning_performance_dswap_adaptive_rectifying_97.pdf>
+Package pdftex.def Info: figures/pruning_performance_dswap_adaptive_rectifying_
+97.pdf  used on input line 116. on input line 116.
+Package pdftex.def Info: Requested size: 216.81pt x 136.14612pt on input line 1
+16.
+<figures/rectifiying_error_f_s_greedy.pdf, id=72, pagebox=cropbox, 404.51125pt 
+x 265.99374pt>
 File: figures/rectifiying_error_f_s_greedy.pdf Graphic file (type pdf)
 <use figures/rectifiying_error_f_s_greedy.pdf>
 Package pdftex.def Info: figures/rectifiying_error_f_s_greedy.pdf  used on inpu
-t line 389. on input line 389.
-Package pdftex.def Info: Requested size: 216.81pt x 142.56703pt on input line 3
-89.
-<figures/rectifiying_error_f_s_dswap.pdf, id=10, pagebox=cropbox, 404.51125pt x
+t line 135. on input line 135.
+Package pdftex.def Info: Requested size: 216.81pt x 142.56703pt on input line 1
+35.
+<figures/rectifiying_error_f_s_dswap.pdf, id=73, pagebox=cropbox, 404.51125pt x
  265.99374pt>
 File: figures/rectifiying_error_f_s_dswap.pdf Graphic file (type pdf)
 <use figures/rectifiying_error_f_s_dswap.pdf>
 Package pdftex.def Info: figures/rectifiying_error_f_s_dswap.pdf  used on input
- line 390. on input line 390.
-Package pdftex.def Info: Requested size: 216.81pt x 142.56703pt on input line 3
-90.
-<figures/flight_costs_rectifying.pdf, id=11, pagebox=cropbox, 844.95674pt x 597
+ line 136. on input line 136.
+Package pdftex.def Info: Requested size: 216.81pt x 142.56703pt on input line 1
+36.
+<figures/flight_costs_rectifying.pdf, id=74, pagebox=cropbox, 844.95674pt x 597
 .432pt>
 File: figures/flight_costs_rectifying.pdf Graphic file (type pdf)
 <use figures/flight_costs_rectifying.pdf>
 Package pdftex.def Info: figures/flight_costs_rectifying.pdf  used on input lin
-e 400. on input line 400.
+e 146. on input line 146.
 Package pdftex.def Info: Requested size: 469.75499pt x 332.14388pt on input lin
-e 400.
+e 146.
+
+
+LaTeX Warning: Float too large for page by 14.38104pt on input line 429.
 
 
 AED: lastpage setting LastPage
-[1] [2] [3] [4 <./figures/pruning_performance_greedy_rectifying_step_back.pdf> 
-<./figures/pruning_performance_dswap_rectifying_step_back.pdf
+[3 <./figures/pruning_performance_greedy_adaptive_rectifying_80.pdf> <./figures
+/pruning_performance_dswap_adaptive_rectifying_80.pdf
 
-pdfTeX warning: pdflatex.exe (file ./figures/pruning_performance_dswap_rectifyi
-ng_step_back.pdf): PDF inclusion: multiple pdfs with page group included in a s
-ingle page
-> <./figures/rectifiying_error_f_s_greedy.pdf
+pdfTeX warning: pdflatex.exe (file ./figures/pruning_performance_dswap_adaptive
+_rectifying_80.pdf): PDF inclusion: multiple pdfs with page group included in a
+ single page
+> <./figures/pruning_performance_greedy_adaptive_rectifying_90.pdf
 
-pdfTeX warning: pdflatex.exe (file ./figures/rectifiying_error_f_s_greedy.pdf):
- PDF inclusion: multiple pdfs with page group included in a single page
-> <./figures/rectifiying_error_f_s_dswap.pdf
+pdfTeX warning: pdflatex.exe (file ./figures/pruning_performance_greedy_adaptiv
+e_rectifying_90.pdf): PDF inclusion: multiple pdfs with page group included in 
+a single page
+> <./figures/pruning_performance_dswap_adaptive_rectifying_90.pdf
+
+pdfTeX warning: pdflatex.exe (file ./figures/pruning_performance_dswap_adaptive
+_rectifying_90.pdf): PDF inclusion: multiple pdfs with page group included in a
+ single page
+> <./figures/pruning_performance_greedy_adaptive_rectifying_97.pdf
+
+pdfTeX warning: pdflatex.exe (file ./figures/pruning_performance_greedy_adaptiv
+e_rectifying_97.pdf): PDF inclusion: multiple pdfs with page group included in 
+a single page
+> <./figures/pruning_performance_dswap_adaptive_rectifying_97.pdf
+
+pdfTeX warning: pdflatex.exe (file ./figures/pruning_performance_dswap_adaptive
+_rectifying_97.pdf): PDF inclusion: multiple pdfs with page group included in a
+ single page
+>] [4] [5] [6 <./figures/rectifiying_error_f_s_greedy.pdf> <./figures/rectifiyi
+ng_error_f_s_dswap.pdf
 
 pdfTeX warning: pdflatex.exe (file ./figures/rectifiying_error_f_s_dswap.pdf): 
 PDF inclusion: multiple pdfs with page group included in a single page
@@ -450,13 +527,13 @@ pdfTeX warning: pdflatex.exe (file ./figures/flight_costs_rectifying.pdf): PDF
 inclusion: multiple pdfs with page group included in a single page
 >] (Rectifying_Bound_21_Aug_2018.aux) ) 
 Here is how much of TeX's memory you used:
- 5303 strings out of 493312
- 82396 string characters out of 3138890
- 183139 words of memory out of 3000000
- 8777 multiletter control sequences out of 15000+200000
+ 5337 strings out of 493312
+ 84186 string characters out of 3138890
+ 180171 words of memory out of 3000000
+ 8805 multiletter control sequences out of 15000+200000
  6777 words of font info for 25 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,20n,45p,1301b,596s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 42i,20n,45p,1168b,592s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1
 /public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
 amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
@@ -469,9 +546,9 @@ onts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
 1/public/amsfonts/cm/cmti10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
 /amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
 s/cm/cmtt10.pfb>
-Output written on Rectifying_Bound_21_Aug_2018.pdf (5 pages, 582450 bytes).
+Output written on Rectifying_Bound_21_Aug_2018.pdf (7 pages, 1460216 bytes).
 PDF statistics:
- 183 PDF objects out of 1000 (max. 8388607)
+ 294 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 

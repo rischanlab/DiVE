@@ -21,7 +21,7 @@
 	\vspace*{\stretch{1.0}}
 	\begin{center}
 		\Large\textbf{Rectifying Bound}\\
-		\large\textit{20 August 2018}
+		\large\textit{22 August 2018}
 	\end{center}
 	\vspace*{\stretch{2.0}}
 \end{titlepage}
@@ -34,6 +34,122 @@
 
 
 
+
+
+
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=7.0in]{figures/rectify_logic}
+		\vspace{-8pt}
+		\caption{Rectifying maximum bound in DiVE-Greedy-Adaptive while $k = 5$}
+		\label{fig:rectify_logic}
+		
+	\end{center}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=7.0in]{figures/get_I_score}
+		\vspace{-8pt}
+		\caption{get\_I\_score function}
+		\label{fig:getIscore}
+		
+	\end{center}
+\end{figure}
+
+\section{Correcting wrong maximum bound in adaptive pruning schemes}
+
+
+In order to reduce costs, our DiVE schemes utilize the importance score bound to do pruning. There are two pruning techniques proposed: 1) static bound approach and 2) adaptive bound approach. In the static bound, the theoritical maximum bound ($ \sqrt{2} $) is used and this bound will not be changed until the end of running. Meanwhile, adaptive used the estimation of maximum bound as the first, then this bound is updated where there is a higher maximum bound found. 
+
+
+To know when the bound should be updated, samping based on prediction interval is used. Before running the program, user needs to defined what PI that she wants to use. For instance, while users set PI to 80, it means after 9 views are executed, the current bound will be updated to the maximum importance score which have seen so far. In the algorithm \ref{DiVE-Greedy-Pruning-Rectifying} and \ref{DiVE-dSwap-Pruning-Rectifying}, $getMaxPI(L)$ is the function to get the estimated maximum bound from some number of executed views based on PI. Generally, PI can be defined as following: 
+
+\begin{itemize}[noitemsep]
+	\item PI80: need to execute 9 views
+	\item PI85: need to execute 12 views
+	\item PI90: need to executes 20 views
+	\item PI95: need to executes 40 views
+	\item PI97: need to executes 60 views
+\end{itemize}
+
+
+Our experiment results show that Adaptive scheme has the best pruning performance while PI80 is used. However, it reduces the effectiveness of recommended views due to only small number of executed views are needed for PI80. It causes the increasing of probability to have wrong bound. The safest way is to use higher PI such as PI95 or PI97. However, if there is a way to keep using PI80 without reducing effectiveness, it will definitely be very good. In fact, \textit{the goal of pruning scheme is to minimize query view execution (i.e., use low PI) without reducing the quality of recommended views}. In order to overcome this issue, rectifying bound of adaptive pruning is proposed. The algorithms of our rectifying bound can be seen in algorithm \ref{DiVE-Greedy-Pruning-Rectifying} for DiVE-Greedy-Adaptive and \ref{DiVE-dSwap-Pruning-Rectifying} for DiVE-dSwap-Adaptive. 
+
+
+The idea behind the rectifying bound algorithm is to keep track: 1) the position of maximum $setDist$ score in $L$ while it gets early termination, 2) the set $S$ (i.e., the initial set $S$ while iteration start ) and 3) $S'$ (i.e., the set $S$ in the end of iteration) in each Greedy and Swap iteration. For instance, Figure \ref{fig:rectify_logic} shows the rectifying algorithm of DiVE-Greedy-Adaptive while $k = 5$. Firstly, there are two most distant views in the set $S$ as the initialization. The first iteration of Greedy is to add one most optimal view to the set $S$, while in the end of the first iteration, size of $S = 3$. As shown in the Figure, some views are executed in advanced (i.e., $V_1 - V_9$) due to PI80 is currently used (Algorithm \ref{DiVE-Greedy-Pruning-Rectifying}, line 11 ). The one of view from 9 executed views which has the highest improvement to set $S$ will be added to set $S$ (i.e., $S \cup V_1$), this $F(S \cup V_1)$ will be the current $F(S)$. Moreover, the $max_b$ is obtained from the highest importance score of these executed views, e.g., $max_b = 0.4$. 
+
+Notice that up to this step, the current $F(S)$ and $max_b$ are known. The next step is to calculate $maxF(S \cup V_i)$ using actual diversity score ($setDist(V_i, S)$) and upper bound of importance score ($max_b$). If $maxF(S \cup X_i) >$  $F(S)$, then the $X_i$ can ``potentially'' improve $F\left(S\right)$. However, if $maxF(S \cup X_i) < F(S)$, then $X_i$ can be ``pruned''. As shown in the \textit{Iteration I}, three views ($V_{10}, V_{11}, V_{12}$) have $maxF > F$. Hence, these three views need to be executed. Otherwise, views below $V_{13}$ can be ignored (i.e., early termination start on $V_{13}$). In the end of the \textit{iteration I}, the result set $S'$ will be generated which consists of three views (set $S \cup X_i$). Moreover, in the end of each iteration, $S, S', L, max_d$, and $iteration\; count$ are stored, $max_d$ is the maximum view while it gets early termination (i.e., $V_{13}$). 
+
+While in the next iteration (i.e., \textit{Iteration II}), there is a higher bound compared to the current $max_b$, then the current $max_b$ will be updated to the new one and the loop will be stoped. Afterwards, the \textit{Iteration I} will be visited again and before that $S, S', L$ are fetched from the previous result of \textit{iteration I}. As shown in the Figure, after revisit the \textit{iteration I} with the new $max_b$, there are some views that need to be executed (i.e., $V_{13}, V_{14}, V_{15}, V_{20}$) and the early termination start on $V_{21}$. If in this revisit, there is a view that can improve the $S'$ from the previous result then $F(S)$ will be updated, otherwise, $F(S)$ is still same and go to the next iteration with the current $max_b$.     
+
+In the end of running, the number of executed and unexecuted queries are calculated. This algorithm uses book keeping strategy as shown in Figure  \ref{fig:getIscore}. 
+
+The results of this rectifying bound strategy can be seen in Figure \ref{fig:rectifying_bound_greedy_dswap80} to Figure \ref{fig:rectifying_bound_greedy_dswap97}. The results are average from five queries. These Figures show the performance of adaptive pruning scheme with rectifying bound strategy compared to without rectifying bound strategy. The pruning peformance after applying rectifying bound strategy quite close to without rectifying bound strategy. Meanwhile, as shown in Figure \ref{fig:error_fs_adaptive} there is no effectiveness loss after rectifying bound is implemented especially for PI80. Moreover, the costs comparison of our rectifying algorithm is presented as weel in Figure \ref{fig:flight_costs_all_rectifying}. This Figure shows the total cost of our pruning scheme with and without rectifying bound strategy which running on Flights dataset. 
+
+\begin{figure}
+	\begin{center}
+		\vspace{-20pt}
+		\includegraphics[width=3.0in]{figures/pruning_performance_greedy_adaptive_rectifying_80}
+		\includegraphics[width=3.0in]{figures/pruning_performance_dswap_adaptive_rectifying_80}
+		\caption{Rectifying vs. No Rectifiying of adaptive scheme (PI80)}
+		\label{fig:rectifying_bound_greedy_dswap80}
+	\end{center}
+\end{figure}
+
+
+\begin{figure}
+	\begin{center}
+		\vspace{-20pt}
+		\includegraphics[width=3.0in]{figures/pruning_performance_greedy_adaptive_rectifying_90}
+		\includegraphics[width=3.0in]{figures/pruning_performance_dswap_adaptive_rectifying_90}
+		\caption{Rectifying vs. No Rectifiying of adaptive scheme (PI90)}
+		\label{fig:rectifying_bound_greedy_dswap90}
+	\end{center}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+		\vspace{-20pt}
+		\includegraphics[width=3.0in]{figures/pruning_performance_greedy_adaptive_rectifying_97}
+		\includegraphics[width=3.0in]{figures/pruning_performance_dswap_adaptive_rectifying_97}
+		\caption{Rectifying vs. No Rectifiying of adaptive scheme (PI97)}
+		\label{fig:rectifying_bound_greedy_dswap97}
+	\end{center}
+\end{figure}
+
+%\begin{figure}
+%	\begin{center}
+%		\vspace{-20pt}
+%		\includegraphics[width=3.0in]{figures/pruning_performance_greedy_rectifying_step_back}
+%		\includegraphics[width=3.0in]{figures/pruning_performance_dswap_rectifying_step_back}
+%		\caption{Pruning performance of rectifying bound schemes compared to others}
+%		\label{fig:rectifying_bound_greedy_dswap}
+%	\end{center}
+%\end{figure}
+
+\begin{figure}
+	\begin{center}
+		\vspace{-15pt}
+		\includegraphics[width=3.0in]{figures/rectifiying_error_f_s_greedy}
+		\includegraphics[width=3.0in]{figures/rectifiying_error_f_s_dswap}
+		\caption{Error $F(S)$ after rectifying bound}
+		\label{fig:error_fs_adaptive}
+	\end{center}
+\end{figure}
+
+
+\begin{figure}
+	\begin{center}
+			\vspace{-230pt}
+		\includegraphics[width=6.5in]{figures/flight_costs_rectifying}
+		\vspace{-40pt}
+		\caption{Total costs of schemes running on Flights dataset, $k = 5$, and $\lambda = 0.5$ }
+		\label{fig:flight_costs_all_rectifying}
+		\vspace{-10pt}
+	\end{center}
+\end{figure}
 
 
 
@@ -65,93 +181,98 @@
 		
 		\KwRet L\;
 	}
-
-%\SetKwFunction{FgetMaxPI}{getMaxPI}
-%\SetKwProg{Fn}{function}{:}{}
-%\Fn{\FgetMaxPI{$f$,$S$, $X$,$max_b$}}{
-%	$samples \leftarrow get\_samples\_PI(X)$\;
-%	$maxI\_S \leftarrow get\_maxI(S)$\;
-%	$maxI\_samples \leftarrow get\_maxI(samples)$\;
-%	
-%	\If{ $ maxI\_S > maxI $}{
-%		$ maxI \leftarrow maxI\_S$
-%	}
-%	\If{ $ maxI\_samples> maxI $}{
-%		$ maxI \leftarrow maxI\_samples$
-%	}
-%	$max_b \leftarrow maxI$		
-%	
-%	\KwRet\;
-%}
+	
+	%\SetKwFunction{FgetMaxPI}{getMaxPI}
+	%\SetKwProg{Fn}{function}{:}{}
+	%\Fn{\FgetMaxPI{$f$,$S$, $X$,$max_b$}}{
+	%	$samples \leftarrow get\_samples\_PI(X)$\;
+	%	$maxI\_S \leftarrow get\_maxI(S)$\;
+	%	$maxI\_samples \leftarrow get\_maxI(samples)$\;
+	%	
+	%	\If{ $ maxI\_S > maxI $}{
+	%		$ maxI \leftarrow maxI\_S$
+	%	}
+	%	\If{ $ maxI\_samples> maxI $}{
+	%		$ maxI \leftarrow maxI\_samples$
+	%	}
+	%	$max_b \leftarrow maxI$		
+	%	
+	%	\KwRet\;
+	%}
 	
 	%$ rectify \leftarrow False $\;
-	$ L_{base}, S_{base},S'_{base}   \leftarrow getL(S,X), S, S \cup L[X_1] $\;
-	$max_b \leftarrow getMaxPI(S,X) $	\;
+	%$ L_{base}, S_{base},S'_{base}   \leftarrow getL(S,X), S, S \cup L[X_1] $\;
+	$max_b \leftarrow getMaxPI(L) $	\;
 	$rectify \leftarrow False $	\;
 	\;
 	\While{$i < k$}{
-
 		
-	%	$ S' \leftarrow S $\;
+		
+		%	$ S' \leftarrow S $\;
 		\If{$rectify = False$}{
-		$ L \leftarrow getL(S,X) $\;
-	$ S' \leftarrow S \cup L[X_1] $\;	
-	}
+			$ L \leftarrow getL(S,X) $\;
+			$ S' \leftarrow S \cup L[X_1] $\;	
+		}
 		\For{$L_i$ in $L$}{
 			\If{$rectify=True$}{
-			 $start\; loop\; at\; L[min_d]$}
+				$start\; loop\; at\; L[min_d]$}
 			\If{ $ F\left(S'\right) < F\left(S \cup X_i, max_b\right) $}{
-					$ I \leftarrow get\_I\_score(X_i) $\;
-			\If{ $ F\left(S'\right) < F\left(S \cup X_i, I\right) $}{
-			$ S'  \leftarrow S \cup X_i $  \;
-		}
-		\eIf{ $ I > max_b $}{
-			$ max_b \leftarrow I $\;
-			$ rectify = True $\;
-			$ break (Out\ of\ Loop) $\;
-		}{
-			$ rectify = False $\;
-			
-		}
+				$ I \leftarrow get\_I\_score(X_i) $\;
+				\If{ $ F\left(S'\right) < F\left(S \cup X_i, I\right) $}{
+					$ S'  \leftarrow S \cup X_i $  \;
+				}
+				\eIf{ $ I > max_b $}{
+					$ max_b \leftarrow I $\;
+					$ rectify = True $\;
+					$ break (Out\ of\ Loop) $\;
+				}{
+					$ rectify = False $\;
+					
+				}
 			}
-		
-		
+			
+			
 			
 		}
-	
+		
 		%$ S  \leftarrow S'$\;
-	
+		
 		
 		\eIf{ $ rectify == True $}{
-%		\If{$step\_back < i - 2$}{
-%%		$ S, S' \leftarrow S_{base} $ \;
-%%	$ L \leftarrow L_{base} $ \;
-%%	$i \leftarrow  2$ \;	
-%	$ G \leftarrow fetchTempResult(i- step\_back)$\;
-%$ S, S' \leftarrow G[S], G[S'] $ \;
-%$ L \leftarrow G[L] $ \;
-%$i = i- step\_back  $\;
-%	}
+			%		\If{$step\_back < i - 2$}{
+			%%		$ S, S' \leftarrow S_{base} $ \;
+			%%	$ L \leftarrow L_{base} $ \;
+			%%	$i \leftarrow  2$ \;	
+			%	$ G \leftarrow fetchTempResult(i- step\_back)$\;
+			%$ S, S' \leftarrow G[S], G[S'] $ \;
+			%$ L \leftarrow G[L] $ \;
+			%$i = i- step\_back  $\;
+			%	}
+			
+%			$ S, S' \leftarrow S_{base},S'_{base}  $ \;
+%			$ L \leftarrow L_{base} $ \;
+%			$i \leftarrow  2$ \;	
 
-		$ S, S' \leftarrow S_{base},S'_{base}  $ \;
-	$ L \leftarrow L_{base} $ \;
-	$i \leftarrow  2$ \;	
-
-		
-		
-	}{
-	$ storeTempResult(i, S, S', L, min_d)$\;
-	$ S \leftarrow S' $ \;
-		$i = i + 1  $\;
-}
+$ G \leftarrow fetchTempResult(i- 2)$\;
+$ S, S' \leftarrow G[S], G[S'] $ \;
+$ L \leftarrow G[L] $ \;
+$i = i- 2  $\;
 			
 			
-	
+			
+		}{
+			$ storeTempResult(i, S, S', L, min_d)$\;
+			$ S \leftarrow S' $ \;
+			$i = i + 1  $\;
+		}
 		
-
 		
-	
-	
+		
+		
+		
+		
+		
+		
 		
 		%
 		%\If{ $ F\left(S'\right) > F\left(S\right) $}{
@@ -177,116 +298,121 @@
 	\SetKwBlock{Begin}{}{end}
 	\KwIn{Set of views V and result set $S$ize k }
 	\KwOut{Result set $ S \leq V $, size S = k}  
- 	\SetKwFunction{FgetL}{getL}
+	\SetKwFunction{FgetL}{getL}
 	$S \leftarrow $ Result set of only diversity\;
 	$X \leftarrow  \left[V \backslash S\right]$\;
-
 	
 	
-\SetKwFunction{FgetL}{getL}
-\SetKwProg{Fn}{function}{:}{}
-\Fn{\FgetL{$f$,$S$, $X$,$L$}}{
-	\For{$X_i$ in set $X$}{
-		\For{$S_j$ in set $S$}{
-			$ d  \leftarrow setDist\left(X_i,S \right) $\;
-			%$ 	X' \leftarrow [ X_i, d]$\;
-			$ 	L.append([S_j, X_i, d])$\;
+	
+	\SetKwFunction{FgetL}{getL}
+	\SetKwProg{Fn}{function}{:}{}
+	\Fn{\FgetL{$f$,$S$, $X$,$L$}}{
+		\For{$X_i$ in set $X$}{
+			\For{$S_j$ in set $S$}{
+				$ d  \leftarrow setDist\left(X_i,S \right) $\;
+				%$ 	X' \leftarrow [ X_i, d]$\;
+				$ 	L.append([S_j, X_i, d])$\;
+			}
 		}
+		$ 	L \leftarrow sorted\_by\_d(L) $\;
+		
+		\KwRet L\;
 	}
-	$ 	L \leftarrow sorted\_by\_d(L) $\;
 	
-	\KwRet L\;
-}
-
-%\SetKwFunction{FgetMaxPI}{getMaxPI}
-%\SetKwProg{Fn}{function}{:}{}
-%\Fn{\FgetMaxPI{$f$,$S$, $X$,$max_b$}}{
-%	$samples \leftarrow get\_samples\_PI(X)$\;
-%	$maxI\_S \leftarrow get\_maxI(S)$\;
-%	$maxI\_samples \leftarrow get\_maxI(samples)$\;
-%	
-%	\If{ $ maxI\_S > maxI $}{
-%		$ maxI \leftarrow maxI\_S$
-%	}
-%	\If{ $ maxI\_samples> maxI $}{
-%		$ maxI \leftarrow maxI\_samples$
-%	}
-%	$max_b \leftarrow maxI$		
-%	
-%	\KwRet\;
-%}
-
-$F_{current}, counter \leftarrow 0,0$\;
-$ improve, rectify \leftarrow  True, False $\;
-$ S_{base}, L_{base}   \leftarrow S, getL(S,X) $\;
-	$max_b \leftarrow getMaxPI(S,X) $	\;
-\;
+	%\SetKwFunction{FgetMaxPI}{getMaxPI}
+	%\SetKwProg{Fn}{function}{:}{}
+	%\Fn{\FgetMaxPI{$f$,$S$, $X$,$max_b$}}{
+	%	$samples \leftarrow get\_samples\_PI(X)$\;
+	%	$maxI\_S \leftarrow get\_maxI(S)$\;
+	%	$maxI\_samples \leftarrow get\_maxI(samples)$\;
+	%	
+	%	\If{ $ maxI\_S > maxI $}{
+	%		$ maxI \leftarrow maxI\_S$
+	%	}
+	%	\If{ $ maxI\_samples> maxI $}{
+	%		$ maxI \leftarrow maxI\_samples$
+	%	}
+	%	$max_b \leftarrow maxI$		
+	%	
+	%	\KwRet\;
+	%}
+	
+	$F_{current}, counter \leftarrow 0,0$\;
+	$ improve, rectify \leftarrow  True, False $\;
+	%$ S_{base}, L_{base}   \leftarrow S, getL(S,X) $\;
+	$max_b \leftarrow getMaxPI(L) $	\;
+	\;
 	\While{$improve = True$}{
 		$counter = counter + 1$ \;	
-			\If{$rectify = False$}{
-				$L \leftarrow getL(S,X)$ \;	
-		$ S' \leftarrow S $\;
-
+		\If{$rectify = False$}{
+			$L \leftarrow getL(S,X)$ \;	
+			$ S' \leftarrow S $\;
+			
 		}
-	
-
+		
+		
 		\For{$L_i$ in $L$}{
-				\If{$rectify=True$}{
+			\If{$rectify=True$}{
 				$start\; loop\; at\; L[min_d]$}
 			\If{ $ F\left(S'\right) < F\left(S \backslash S_j \cup X_i, max_b\right) $}{
-			%	$ 	L'.append(L_i)$\;
-			
-			$ I \leftarrow get\_I\_score(X_i) $\;
-			\If{ $ F\left(S'\right) < F\left(S\backslash S_j \cup X_i, I\right) $}{
-				$ S'  \leftarrow S \backslash j \cup X_i $  \;
+				%	$ 	L'.append(L_i)$\;
+				
+				$ I \leftarrow get\_I\_score(X_i) $\;
+				\If{ $ F\left(S'\right) < F\left(S\backslash S_j \cup X_i, I\right) $}{
+					$ S'  \leftarrow S \backslash j \cup X_i $  \;
+				}
+				\eIf{ $ I > max_b $}{
+					$ max_b \leftarrow I $\;
+					$ rectify = True $\;
+					$ break (Out\ of\ Loop) $\;
+				}{
+					$ rectify = False $\;
+				}
 			}
-			\eIf{ $ I > max_b $}{
-				$ max_b \leftarrow I $\;
-				$ rectify = True $\;
-				$ break (Out\ of\ Loop) $\;
-			}{
-			$ rectify = False $\;
-		}
-		}
 		}
 		
 		
 		\eIf{$rectify == True$}{
-%			\eIf{$step\_back < counter $}{
-%	
-%					$ G \leftarrow fetchTempResult(counter - step\_back)$\;
-%				$ S, S' \leftarrow G[S], G[S'] $ \;
-%				$ L \leftarrow G[L] $ \;
-%			}{	}
-					$ S, S' \leftarrow S_{base} $ \;
-					$ L \leftarrow L_{base} $ \;
-					$counter = 0$
-
+			%			\eIf{$step\_back < counter $}{
+			%	
+			%					$ G \leftarrow fetchTempResult(counter - step\_back)$\;
+			%				$ S, S' \leftarrow G[S], G[S'] $ \;
+			%				$ L \leftarrow G[L] $ \;
+			%			}{	}
+%			$ S, S' \leftarrow S_{base} $ \;
+%			$ L \leftarrow L_{base} $ \;
+%			$counter = 0$
+			
+			$ G \leftarrow fetchTempResult(counter=1)$\;
+			$ S, S' \leftarrow G[S], G[S'] $ \;
+			$ L \leftarrow G[L] $ \;
+			$counter = 0 $\;
+			
 			$  improve \leftarrow  True $\;
 			
 			
 		}{
-		
+			
 			$ storeTempResult(counter, S, S', L, min_d)$\;
-
-\If{ $ F\left(S'\right) > F\left(S\right) $}{
-	$ S  \leftarrow S'$\;
-	
-}	
-
-	\eIf{ $ F\left(S\right) > F_{current} $}{
-	$ F_{current}  \leftarrow F\left(S\right) $\;
-	$  improve \leftarrow  True $\;
-	
-}{
-	$improve \leftarrow  False $\;
-	
-}
-
-}
-	
-
-	
+			
+			\If{ $ F\left(S'\right) > F\left(S\right) $}{
+				$ S  \leftarrow S'$\;
+				
+			}	
+			
+			\eIf{ $ F\left(S\right) > F_{current} $}{
+				$ F_{current}  \leftarrow F\left(S\right) $\;
+				$  improve \leftarrow  True $\;
+				
+			}{
+				$improve \leftarrow  False $\;
+				
+			}
+			
+		}
+		
+		
+		
 		
 		%
 		%\If{ $ F\left(S'\right) > F\left(S\right) $}{
@@ -301,109 +427,6 @@ $ S_{base}, L_{base}   \leftarrow S, getL(S,X) $\;
 	$return\; S$
 	\caption{\textit{DiVE} dSwap Pruning Rectifying}\label{DiVE-dSwap-Pruning-Rectifying}
 \end{algorithm}
-
-
-
-
-\section{Correcting wrong maximum bound in adaptive pruning schemes}
-
-
-In order to reduce costs, our DiVE schemes utilize the importance score bound to do pruning. There are two pruning techniques proposed: 1) static bound approach and 2) adaptive bound approach. In the static bound, the theoritical maximum bound ($ \sqrt{2} $) is used and this bound will not be changed until the end of running. Meanwhile, adaptive used the estimation of maximum bound as the first, then this bound is updated where there is a higher maximum bound found. 
-
-
-To know when the bound should be updated, samping based on prediction interval is used. Before running the program, user needs to defined what PI that she wants to use. For instance, while users set PI to 80, it means after 9 views are executed, the current bound will be updated to the maximum importance score which have seen so far. In the algorithm \ref{DiVE-Greedy-Pruning-Rectifying} and \ref{DiVE-dSwap-Pruning-Rectifying}, $getMaxPI(S,X)$ is the function to get the estimated maximum bound from some number of executed views based on PI. Generally, PI can be defined as following: 
-
-\begin{itemize}[noitemsep]
-	\item PI80: need to execute 9 views
-	\item PI85: need to execute 12 views
-	\item PI90: need to executes 20 views
-	\item PI95: need to executes 40 views
-	\item PI97: need to executes 60 views
-\end{itemize}
-
-
-
-
-%
-%\begin{figure}
-%	\begin{center}
-%		\includegraphics[width=7.0in]{figures/rectifying_bound_2}
-%		\vspace{-8pt}
-%		\caption{Rectifying maximum bound on adaptive pruning scheme}
-%		\label{fig:rectifying_bound_2}
-%		
-%	\end{center}
-%\end{figure}
-
-
-%As shown in the Figure \ref{fig:DiVE-Greedy} and \ref{fig:adaptive-pruning-performance}, the adaptive bound has a better performance of pruning compared to the static one. 
-
-Our experiment results show that Adaptive scheme has the best pruning performance while PI80 is used. However, it reduces the effectiveness of recommended views due to only small number of executed views are needed for PI80. It causes the increasing of probability to have wrong bound. The safest way is to use higher PI such as PI95 or PI97. However, if there is a way to keep using PI80 without reducing effectiveness, it will definitely be very good. In fact, \textit{the goal of pruning scheme is to minimize query view execution (i.e., use low PI) without reducing the quality of recommended views}. In order to overcome this issue, rectifying bound of adaptive pruning is proposed. The algorithms of our rectifying bound can be seen in algorithm \ref{DiVE-Greedy-Pruning-Rectifying} for DiVE-Greedy-Adaptive and \ref{DiVE-dSwap-Pruning-Rectifying} for DiVE-dSwap-Adaptive. 
-
-The idea behind the rectifying bound algorithm is to keep track: 1) the maximum of $setDist$ score position in $L$ while it gets early termination, 2) the set $S$ (i.e., the initial set $S$ while iteration start ) and 3) $S'$ (i.e., the set $S$ in the end of iteration) in each Greedy and Swap iteration. User can determine the $step\_back$ parameter in case the size of $k$ is large. For instance, while user uses $k = 20$ and $step\_back = 3$, if there is a higher bound in the $14^{th}$ iteration, the algorithm will go to $11^{st}$ iteration and rectify the bound. The $L, S $, and $S'$ of $11^{st}$ iteration will be used, the new maximum bound will be used for the remaining views in $L$ (i.e., unexecuted views due to early termination) and if there is a view that can improve the $F(S)$ compared to the previous result then the new result will be used. However, in case of small number of $k$, such as $k = 5$, there will be default $step\_back$ which is revert to the first iteration. For instance, Greedy starts with two views in set $S$, while $k = 5$ means there are only three iterations to generate the result. While in the middle of Greedy running, there is a higher bound then the iterations can be start again from size $S = 2$.    
-
-
-The results of this rectifying bound strategy can be seen in Figure \ref{fig:rectifying_bound_greedy_dswap} and Figure \ref{fig:error_fs_adaptive}. Figure \ref{fig:rectifying_bound_greedy_dswap} shows the performance of adaptive pruning scheme with rectifying bound strategy compared to without rectifying bound strategy. The pruning peformance after applying rectifying bound strategy quite close to without rectifying bound strategy. Meanwhile, as shown in Figure \ref{fig:error_fs_adaptive} there is no effectiveness loss after rectifying bound is implemented. Moreover, the costs comparison of our rectifying algorithm is presented as weel in Figure \ref{fig:flight_costs_all_rectifying}. This Figure shows the total cost of our pruning scheme with and without rectifying bound strategy which running on Flights dataset. 
-
-%
-%\begin{figure}
-%	\begin{center}
-%		\includegraphics[width=4.0in]{figures/rectifying_cost}
-%		\vspace{-8pt}
-%		\caption{Rectifying bound strategy cost, $k = 5, \lambda = 0.5$}
-%		\label{fig:rectifying_cost}
-%		
-%	\end{center}
-%\end{figure}
-
-
-
-%\begin{figure}
-%	\begin{center}
-%		\includegraphics[width=4.0in]{figures/error_f_s}
-%		\vspace{-12pt}
-%		\caption{Impact of $k$ to diversity computation running on Flights dataset}
-%		\label{fig:error_fs_adaptive}
-%		
-%	\end{center}
-%\end{figure}
-
-
-%\section{Total cost with and without Rectifying mechanism}
-
-
-
-\begin{figure}
-	\begin{center}
-		\vspace{-20pt}
-		\includegraphics[width=3.0in]{figures/pruning_performance_greedy_rectifying_step_back}
-		\includegraphics[width=3.0in]{figures/pruning_performance_dswap_rectifying_step_back}
-		\caption{Pruning performance of rectifying bound schemes compared to others}
-		\label{fig:rectifying_bound_greedy_dswap}
-	\end{center}
-\end{figure}
-
-\begin{figure}
-	\begin{center}
-		\vspace{-15pt}
-		\includegraphics[width=3.0in]{figures/rectifiying_error_f_s_greedy}
-		\includegraphics[width=3.0in]{figures/rectifiying_error_f_s_dswap}
-		\caption{Error $F(S)$ after rectifying bound}
-		\label{fig:error_fs_adaptive}
-	\end{center}
-\end{figure}
-
-
-\begin{figure}
-	\begin{center}
-			\vspace{-15pt}
-		\includegraphics[width=6.5in]{figures/flight_costs_rectifying}
-		\vspace{-40pt}
-		\caption{Total costs of schemes running on Flights dataset, $k = 5$, and $\lambda = 0.5$ }
-		\label{fig:flight_costs_all_rectifying}
-		\vspace{-10pt}
-	\end{center}
-\end{figure}
 
 \end{document}
 
